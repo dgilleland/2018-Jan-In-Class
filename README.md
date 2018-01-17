@@ -15,6 +15,8 @@ npm i -g npm
 npm i -g live-server
 ```
 
+Next, you need to edit the `path` in your environment variables to include the following: `%USERPROFILE%\AppData\Roaming\npm`
+
 
 ----
 
