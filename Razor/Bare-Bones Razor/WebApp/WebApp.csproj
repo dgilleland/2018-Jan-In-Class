@@ -92,12 +92,18 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="index.cshtml" />
+    <Content Include="Default.cshtml" />
+    <Content Include="About.cshtml" />
+    <Content Include="Sandbox.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="styles\site.css" />
+    <Content Include="_Layout.cshtml" />
+    <Content Include="_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
