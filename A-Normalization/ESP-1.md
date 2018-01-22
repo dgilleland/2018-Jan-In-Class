@@ -93,11 +93,13 @@ OrderNumber | ItemNumber | Quantity | SellingPrice | Amount
 
 > **Item** Table
 
-ItemNumber | Description | CurrentPrice
+ItemNumber | Description | CurrentPrice<sup>&dagger;</sup>
 -----------|-------------|-------------
 <b class="pk">H23</b> | Heater Fan Belt - 23" | 11.99
 <b class="pk">H319</b> | Heater Fan Belt Support Brackets | 4.99
 <b class="pk">M24</b> | Bolts - 24 mm | 0.29
+
+**<sup>&dagger;</sup>** - *The current price for items can change over time.*
 
 ### Customer Orders View ERD
 
