@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="f1_container" style="width:300px;height:250px;">
+        <div id="f1_card" class="shadow">
+            <div class="front face">
+                <img src="http://placehold.it/300x250?text=Sample" />
+            </div>
+            <div class="back face center">
+                <p>Edit Aspects of this image:</p>
+                <input name="width" type="range" min="300" max="1260" step="5" value="300" />
+                <input name="height" type="range" min="250" max="1260" step="5" value="250" />
+
+                <input type="color" name="textColor" />
+                <input type="color" name="backgroundColor" />
+                <input type="text" name="placeholderText" />
+                <ul>
+                    <li><input name="format" value=".gif" type="radio" />.gif</li>
+                    <li><input name="format" value=".jpeg" type="radio" />.jpeg</li>
+                    <li><input name="format" value=".jpg" type="radio" />.jpg</li>
+                    <li><input name="format" value=".png" type="radio" />.png</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
