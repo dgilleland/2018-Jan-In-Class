@@ -15,6 +15,8 @@ Our main tools are going to be
 
 Using Markdown and the Visual Studio Code editor, is it possible to create nice-looking documentation for the normalization process. The Visual Studio Code editor offers a *Preview Pane* when editing markdown files. Used together with an embedded `<style>` set of CSS styles, the preview pane will show a rich HTML rendering of the normalization process.
 
+![](vs-code-markdown-preview.png)
+
 ## Legend
 
 This legend is a guide to reading and interpreting the table listings under 0NF through 3NF.
