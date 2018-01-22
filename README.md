@@ -5,14 +5,15 @@
 Our main tools are going to be
 
 - GitHub Desktop (for version control)
-- Visual Studio Code
+- Visual Studio Code (for normalization documents)
+- LucidChart (for ERDs)
 - SQL Server 2012 or higher
 
 ----
 
 # Normalization
 
-Using Markdown and the Visual Studio Code editor, is it possible to create nice-looking documentation for the normalization process.
+Using Markdown and the Visual Studio Code editor, is it possible to create nice-looking documentation for the normalization process. The Visual Studio Code editor offers a *Preview Pane* when editing markdown files. Used together with an embedded `<style>` set of CSS styles, the preview pane will show a rich HTML rendering of the normalization process.
 
 ## Legend
 
