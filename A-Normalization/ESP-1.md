@@ -53,9 +53,9 @@ After performing Third-Normal Form, another new table was generated: Customer.
 
 **Customer**	(<b class="pk">CustomerNumber</b>, FirstName, LastName, Address, City, Province, PostalCode, Phone)
 
-### Merged Tables
+### Tables after 3<sup>rd</sup> Normal Form
 
-These are the merged tables for Customer Details View and Customer Orders View.
+These are the tables/entities after normalizing the Customer Details View.
 
 **Order**	(<b class="pk">OrderNumber</b>, <u class="fk">CustomerNumber</u>, Date, Subtotal, GST, Total)
 
@@ -66,6 +66,8 @@ These are the merged tables for Customer Details View and Customer Orders View.
 **Customer**	(<b class="pk">CustomerNumber</b>, FirstName, LastName, Address, City, Province, PostalCode, Phone)
 
 #### Verification
+
+> **Note:** This "verification" section would not be required on a lab. It's here for demonstration purposes only, as a step you would do on your own to see if the data "fits" your final set of normalized entitied.
 
 The verification of the final set of entities after going through the normalization process can be demonstrated by drawing tables with the original document's data entered as a sample.
 
@@ -106,7 +108,19 @@ ItemNumber | Description | CurrentPrice<sup>&dagger;</sup>
 The following ERD for the *Customer Orders View* is based on the final 3<sup>rd</sup> normal form.
 
 ![](ESP-1-Customer-Orders-View.png)
+
+#### ERD Description
+
+
+> **Note:** This "ERD Description" section would not be required on a lab. It's here for demonstration purposes only, as a step you would do on your own to see if the structure/relationships *make sense* among your final set of normalized entitied.
  
+- Each **Customer** *must be* <u>one who places</u> *one or more* **Order**s.
+- Each **Order** *must be* <u>placed by</u> *one and only one* **Customer**.
+- Each **Order** *must be* <u>made up of</u> *one or more* **OrderDetail**s.
+- Each **OrderDetail** *must be* <u>for</u> *one and only one* **Order**.
+- Each **Item** *may be* <u>sold under</u> *one or more* **OrderDetail**s.
+- Each **OrderDetail** *must be* <u>a sale of</u> *one and only one* **Item**.
+
 <style type="text/css">
 .pk {
     font-weight: bold;
