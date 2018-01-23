@@ -31,15 +31,15 @@ After performing Zero-Normal Form, a single table was generated: **Order**.
 
 ### 1NF
 
-After performing First-Normal Form, a new table was generated: OrderDetail.
+After performing First-Normal Form, a new table was generated: **OrderDetail**.
 
-**Order:**	(CustomerNumber, FirstName, LastName, Address, City, Province, PostalCode, Phone, Date, <b class="pk">OrderNumber</b>, Subtotal, GST, Total)
+**Order:** (CustomerNumber, FirstName, LastName, Address, City, Province, PostalCode, Phone, Date, <b class="pk">OrderNumber</b>, Subtotal, GST, Total)
 
-**OrderDetail:**	(<b class="pk"><u class="fk">OrderNumber</u>, ItemNumber</b>, Description, Quantity, CurrentPrice, SellingPrice, Amount)
+**OrderDetail:** (<b class="pk"><u class="fk">OrderNumber</u>, ItemNumber</b>, Description, Quantity, CurrentPrice, SellingPrice, Amount)
 
 ### 2NF
 
-After performing Second-Normal Form, another new table was generated: Item.
+After performing Second-Normal Form, another new table was generated: **Item**.
 
 **OrderDetail**	(<b class="pk"><u class="fk">OrderNumber</u>, ItemNumber</b>, Quantity,  SellingPrice, Amount)
 
@@ -47,7 +47,7 @@ After performing Second-Normal Form, another new table was generated: Item.
 
 ### 3NF
 
-After performing Third-Normal Form, another new table was generated: Customer.
+After performing Third-Normal Form, another new table was generated: **Customer**.
 
 **Order**	(<b class="pk">OrderNumber</b>, <u class="fk">CustomerNumber</u>, Date, Subtotal, GST, Total)
 
