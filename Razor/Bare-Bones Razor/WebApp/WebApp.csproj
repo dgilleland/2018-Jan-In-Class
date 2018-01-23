@@ -90,11 +90,27 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FormSamples\ContestEntry.html" />
+    <Content Include="FormSamples\CreateBankAccount.html" />
+    <Content Include="FormSamples\Default.htm" />
+    <Content Include="FormSamples\JobApplication.html" />
+    <Content Include="FormSamples\StudentEnrollment.html" />
     <Content Include="packages.config" />
     <Content Include="index.cshtml" />
     <Content Include="Default.cshtml" />
     <Content Include="About.cshtml" />
+    <None Include="RazorSamples\ContestEntry.cshtml" />
+    <None Include="RazorSamples\CreateBankAccount.cshtml" />
+    <None Include="RazorSamples\Default.cshtm" />
+    <None Include="RazorSamples\JobApplication.cshtml" />
+    <None Include="RazorSamples\StudentEnrollment.cshtml" />
     <Content Include="Sandbox.cshtml" />
+    <Content Include="BeginHere\InputCheckbox.cshtml" />
+    <Content Include="BeginHere\InputPassword.cshtml" />
+    <Content Include="BeginHere\InputRadio.cshtml" />
+    <Content Include="BeginHere\InputText.cshtml" />
+    <Content Include="BeginHere\SelectOption.cshtml" />
+    <Content Include="BeginHere\WebMailSample.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
