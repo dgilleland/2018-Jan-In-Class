@@ -95,6 +95,9 @@
     <Content Include="FormSamples\Default.htm" />
     <Content Include="FormSamples\JobApplication.html" />
     <Content Include="FormSamples\StudentEnrollment.html" />
+    <Content Include="Images\1350.jpg" />
+    <Content Include="Images\240.jpg" />
+    <Content Include="Images\833.jpg" />
     <Content Include="packages.config" />
     <Content Include="index.cshtml" />
     <Content Include="Default.cshtml" />
