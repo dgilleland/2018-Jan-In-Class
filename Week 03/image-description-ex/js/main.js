@@ -1,27 +1,23 @@
-// 1) Declare my event handlers
-function showImage(evt) {
-    // a) Get a reference to the <img class="feature"> element
-    var imgElement = document.querySelector('img.feature');
-    // b) Remove the 'hidden' class from the element
-    imgElement.classList.remove('hidden');
-    // c) Get the href from the <a class="feature link" href="..."> element
-    //    (storing in a local, temporary variable)
-    var imgSrc = linkElement.href;
-    // d) Set the .src attribute's value for the <img>
-    imgElement.src = imgSrc;
-    // e) Set the .alt attribute's value for the <img>
-    imgElement.alt = linkElement.title;
-    // f) Get a reference to the <p class="feature title"></p> element
-    var captionParagraph = document.querySelector('p.feature.title');
-    // g) Put some text in that paragraph
-    captionParagraph.innerHTML = linkElement.title;
+// Note: The code here is presuming that this script is loaded at the END of the HTML Body tag.
 
-    // h) Stop the default actions of this event (the 'click' on an <a> tag)
+// Step 1) Select the link
+//  featureLink will reference an anchor tag
+var featureLink = document.querySelector('a.link.feature');
+
+// Step 2) Create the event listener function (aka event handler)
+function featureLinkHandler(evt) { //evt parameter is an object representing the event as it is passed to our method
+    //  featureImage will reference an image tag
+    var featureImage = document.querySelector('img.feature');
+    featureImage.src = featureLink.href;
+    // All elements have a collection of class names that we can access
+    featureImage.classList.remove('hidden');
+
+    // Stop the normal event from happening
     evt.preventDefault();
 }
 
-// 2) Find the elements that respond to events
-var linkElement = document.querySelector('a.feature.link');
-
-// 3) "Wire up" the elements to the event handlers
-linkElement.addEventListener('click', showImage);
+// Step 3) Add the function as an event listener (hook it up to the 'click' event)
+featureLink.addEventListener('click', featureLinkHandler);
+//                          \ event / \  method name   /
+//                           \name /
+// Note that the featureLinkHandler is not called right now. Instead, it will be called when the click event happens on the featureLink element.
