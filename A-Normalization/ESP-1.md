@@ -1,6 +1,6 @@
 # ESP Document 1
 
-This is a sample solution of normalizing the **Customer Orders View** in ESP Document 1.
+This is a sample solution of normalizing the **Customer Details View** and the **Customer Orders View** in ESP Document 1.
 
 ## Legend
 
@@ -11,6 +11,27 @@ This legend is a guide to reading and interpreting the table listings under 0NF 
 - <b class="pk">PrimaryKeyFields</b> - Primary key fields will be bold and inside a box. (e.g: `<b class="pk">PrimaryKeyFields</b>`)
 - <u class="fk">ForeignKeyFields</u> - Foreign key fields will be a wavy underline in italic and green. (e.g.: `<u class="fk">ForeignKeyFields</u>`)
 - <b class="gp">{</b>Repeating Groups<b class="gp">}</b> - Groups of repeating fields will be identified in 0NF stage, and will be enclosed in orange curly braces. (e.g.: `<b class="gp">{</b>Repeating, Group, Fields<b class="gp">}</b>`)
+
+
+----
+
+## Customer Details View
+
+The Customer Details View and its resulting tables are based on the following form (taken from the original documentation).
+
+![](ESP-1-Customer-Details-View.png)
+
+This form was analyzed according to the rules of 0NF (Zero-Normal Form), 1NF (First-Normal Form), 2NF (Second-Normal Form), and 3NF (Third-Normal Form).
+
+### 0NF
+
+After performing Zero-Normal Form, a single table was generated: **Customer**.
+
+**Customer:** (<b class="pk">CustomerNumber</b>, FirstName. LastName, Address, City, Province, PostalCode, HomePhone)
+
+### 1NF – 3NF
+
+No changes to the table in 1NF to 3NF.
 
 
 ----
