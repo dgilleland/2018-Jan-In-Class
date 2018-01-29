@@ -4,3 +4,31 @@
 // the thumbnail images.
 // In addition to this, the clicked button should be made active
 // (i.e. add the active class).
+
+var liSm = document.querySelector('.thumbnails-sm');
+var liMd = document.querySelector('.thumbnails-md');
+var liLg = document.querySelector('.thumbnails-lg');
+
+function thumbnailSizeHandler(evt) {
+    var target = evt.target; // evt.target is the object the event happened on
+    var thumbnails = document.querySelector('div.thumbnails');
+
+    if(target.classList.contains('active') != true) {
+        // update the active <li> element
+        document.querySelector('li.active').classList.remove('active');
+        target.classList.add('active');
+
+        // determine which button/<li> was clicked
+        if(target.classList.contains('thumbnails-sm')) {
+            console.log('switch size to "sm"');
+        } else if(target.classList.contains('thumbnails-md')) {
+            console.log('switch size to "md"');
+        } else {
+            console.log('switch size to "lg"');
+        }
+    }
+}
+
+liSm.addEventListener('click', thumbnailSizeHandler);
+liMd.addEventListener('click', thumbnailSizeHandler);
+liLg.addEventListener('click', thumbnailSizeHandler);
