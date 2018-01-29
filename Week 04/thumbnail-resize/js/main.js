@@ -5,9 +5,10 @@
 // In addition to this, the clicked button should be made active
 // (i.e. add the active class).
 
-var liSm = document.querySelector('.thumbnails-sm');
-var liMd = document.querySelector('.thumbnails-md');
-var liLg = document.querySelector('.thumbnails-lg');
+// var liSm = document.querySelector('.thumbnails-sm');
+// var liMd = document.querySelector('.thumbnails-md');
+// var liLg = document.querySelector('.thumbnails-lg');
+var ulContainer = document.querySelector('ul.thumbnail-sizes');
 
 function thumbnailSizeHandler(evt) {
     var target = evt.target; // evt.target is the object the event happened on
@@ -38,6 +39,7 @@ function thumbnailSizeHandler(evt) {
     }
 }
 
-liSm.addEventListener('click', thumbnailSizeHandler);
-liMd.addEventListener('click', thumbnailSizeHandler);
-liLg.addEventListener('click', thumbnailSizeHandler);
+// liSm.addEventListener('click', thumbnailSizeHandler);
+// liMd.addEventListener('click', thumbnailSizeHandler);
+// liLg.addEventListener('click', thumbnailSizeHandler);
+ulContainer.addEventListener('click', thumbnailSizeHandler);
