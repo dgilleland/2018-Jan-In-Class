@@ -80,7 +80,7 @@ These are the tables/entities after normalizing the Customer Details View.
 
 **Order**	(<b class="pk">OrderNumber</b>, <u class="fk">CustomerNumber</u>, Date, Subtotal, GST, Total)
 
-**OrderDetail**	(<b class="pk"><u class="fk">OrderNumber</u>, ItemNumber</b>, Quantity,  SellingPrice, Amount)
+**OrderDetail**	(<b class="pk"><u class="fk">OrderNumber</u>, <u class="fk">ItemNumber</u></b>, Quantity,  SellingPrice, Amount)
 
 **Item**	(<b class="pk">ItemNumber</b>, Description, CurrentPrice)
 
