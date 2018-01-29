@@ -44,11 +44,22 @@ After performing Third-Normal Form, a two tables were generated: Customer, and *
 
 **PaymentsLog:** (<b class="pk">OrderNumber</b>, OrderDate, OrderTotal, <u class="fk">CustomerNumber</u>)
 
-**PaymentLogDetails:** (<b class="pk"><u class="fk">OrderNumber</u>, PaymentNumber</b>, BalanceOwing, <u class="fk">PaymentID</u><sup class="note">&Dagger;</sup>)
+**PaymentLogDetails:** (<b class="pk"><u class="fk">OrderNumber</u>, PaymentNumber</b>, Date, PaymentAmount, PaymentType, BalanceOwing, DepositBatchNumber)
 
-**Payment:** (<b class="pk">PaymentID</b><sup class="note">&Dagger;</sup>, Date, PaymentAmount, PaymentType, DepositBatchNumber)
+### Tables after 3<sup>rd</sup> Normal Form
 
-> <span class="note">&Dagger;</span> &ndash; During the analysis of the **PaymentLogDetails**, the *Date*, *PaymentAmount*, *PaymentType*, and *DepositBatchNumber* appear quite closely related to each other as information describing a **Payment**, but with no single attribute acting as an identifier for the group. This tight relationship between the attributes made it somewhat reasonable to pull them out as a **transitive dependency**, but the lack of any unique identifier to the set would need to be dealth with. As such, it appeared that a technical key was needed to uniquely identify the Payment information. Therefore, <b class="pk">PaymentID</b> was added as the technical key.
+These are the tables/entities after normalizing the Payment Log View.
+
+**Customer:** (<b class="pk">CustomerNumber</b>, FirstName, LastName)
+
+**PaymentsLog:** (<b class="pk">OrderNumber</b>, OrderDate, OrderTotal, <u class="fk">CustomerNumber</u>)
+
+**PaymentLogDetails:** (<b class="pk"><u class="fk">OrderNumber</u>, PaymentNumber</b>, Date, PaymentAmount, PaymentType, BalanceOwing, DepositBatchNumber)
+
+### ERD
+
+![](ESP-2-ERD-PaymentLogView.png)
+
 ----
 
 ## Legend
