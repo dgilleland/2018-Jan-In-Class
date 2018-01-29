@@ -21,10 +21,19 @@ function thumbnailSizeHandler(evt) {
         // determine which button/<li> was clicked
         if(target.classList.contains('thumbnails-sm')) {
             console.log('switch size to "sm"');
+            thumbnails.classList.remove('md');
+            thumbnails.classList.remove('lg');
+            thumbnails.classList.add('sm');
         } else if(target.classList.contains('thumbnails-md')) {
             console.log('switch size to "md"');
+            thumbnails.classList.remove('sm');
+			thumbnails.classList.remove('lg');
+			thumbnails.classList.add('md');
         } else {
             console.log('switch size to "lg"');
+            thumbnails.classList.remove('sm');
+			thumbnails.classList.remove('md');
+			thumbnails.classList.add('lg');
         }
     }
 }
