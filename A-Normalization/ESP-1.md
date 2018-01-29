@@ -33,6 +33,11 @@ After performing Zero-Normal Form, a single table was generated: **Customer**.
 
 No changes to the table in 1NF to 3NF.
 
+### ERD
+
+The following ERD represents the tables/entities from the **Customer Details View**.
+
+![](ESP-1-ERD-CustomerDetailsView.png)
 
 ----
 
