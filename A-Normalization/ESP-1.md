@@ -133,7 +133,7 @@ ItemNumber | Description | CurrentPrice<sup>&dagger;</sup>
 
 The following ERD for the *Customer Orders View* is based on the final 3<sup>rd</sup> normal form.
 
-![](ESP-1-Customer-Orders-View.png)
+![](ESP-1-ERD-CustomerOrdersView.png)
 
 #### ERD Description
 
