@@ -6,6 +6,8 @@ It's a good practice to double-check your normalization by attempting two verifi
 
 > **Note:** This "verification" section would not be required on a lab. It's here for demonstration purposes only, as a step you would do on your own to see if the data "fits" your final set of normalized entitied.
 
+![](CustomerOrdersView.png)
+
 The verification of the final set of entities after going through the normalization process can be demonstrated by drawing tables with the original document's data entered as a sample.
 
 > **Order** Table
