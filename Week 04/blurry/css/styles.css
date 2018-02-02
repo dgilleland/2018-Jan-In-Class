@@ -8,6 +8,7 @@
 /* Page Layout */
 body {
     display: grid;
+    grid-gap: 7px;
     grid-template-columns: 60% 40%;
 }
 
@@ -26,6 +27,10 @@ fieldset {
 
 textarea {
     width: 100%;
+}
+
+input[type=text], textarea, select {
+    margin-bottom: 5px;
 }
 
 
