@@ -2,6 +2,21 @@
 <html>
     <head>
         <title></title>
+        <style rel="stylesheet" media="all">
+            body {
+                display: grid;
+            }
+
+            form {
+                display: grid;
+                min-width: 200px;
+                max-width: 300px;
+            }
+
+            fieldset.buttons {
+                border: 0;
+            }
+        </style>
     </head>
 <body>
     <h1>Manage Category</h1>
@@ -71,10 +86,12 @@
         <label>Picture</label>
         <input name="catPic" type="file" value="" />
         <br />
-        <input name="submitType" type="submit" value="Update" />
-        <input name="submitType" type="submit" value="Delete" />
-        <input name="submitType" type="submit" value="Cancel" />
-        <input name="catId" type="hidden" value="@catId" />
+        <fieldset class="buttons">
+            <input name="submitType" type="submit" value="Update" />
+            <input name="submitType" type="submit" value="Delete" />
+            <input name="submitType" type="submit" value="Cancel" />
+            <input name="catId" type="hidden" value="@catId" />
+        </fieldset>
     </form>
 </body>
 
