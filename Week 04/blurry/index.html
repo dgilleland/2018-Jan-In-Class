@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>An Experiment in Fieldset Blurring</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <main>
+        <h1>User Profile</h1>
+        <form>
+            <fieldset id="personalInfo">
+                <legend>Personal and Contact Information</legend>
+                <label for="firstName">First Name</label>
+                <input id="firstName" name="firstName" type="text" placeholder="First Name">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" name="lastName" type="text" placeholder="Last Name">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="text" placeholder="Primary Email">
+            </fieldset>
+            <fieldset id="bioInfo">
+                <legend>Biographical Information</legend>
+                <label for="bio">Biography</label>
+                <textarea name="bio" id="bio" cols="30" rows="10" placeholder="Enter a short summary about your background"></textarea>
+                <label for="education">Highest Education Achieved</label>
+                <select name="education" id="education">
+                    <option value="">[Select a level]</option>
+                    <option value="HS">High School</option>
+                    <option value="Tech">Technical School</option>
+                    <option value="College">College</option>
+                    <option value="University">University</option>
+                </select>
+            </fieldset>
+        </form>
+    </main>
+    <aside>
+        <h1>Processing Results</h1>
+        <div id="output"></div>
+    </aside>
+    <script src="js/main.js"></script>
+</body>
+</html>

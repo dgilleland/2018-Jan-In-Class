@@ -1,0 +1,35 @@
+/* Resets */
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Page Layout */
+body {
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+body > main {
+    grid-column: 1;
+}
+body > aside {
+    grid-column: 2;
+}
+
+/* Form Styling */
+
+fieldset {
+    display: grid;
+}
+
+textarea {
+    width: 100%;
+}
+
+
+/* General Styling */
+h1 {
+    font-size: 1.75em;
+}
