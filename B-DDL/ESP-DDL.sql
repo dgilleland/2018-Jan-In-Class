@@ -49,9 +49,32 @@ CREATE TABLE Customers
     LastName        varchar(60)         NOT NULL,
     [Address]       varchar(40)         NOT NULL,
     City            varchar(35)         NOT NULL,
-    Province        char(2)             NOT NULL,
-    PostalCode      char(6)             NOT NULL,
-    PhoneNumber     char(13)                NULL  -- NULL means the data is optional
+    Province        char(2)
+        CONSTRAINT DF_Customers_Province
+            DEFAULT ('AB')
+        CONSTRAINT CK_Customers_Province
+            CHECK (Province = 'AB' OR
+                   Province = 'BC' OR
+                   Province = 'SK' OR
+                   Province = 'MB' OR
+                   Province = 'QC' OR
+                   Province = 'ON' OR
+                   Province = 'NT' OR
+                   Province = 'NS' OR
+                   Province = 'NB' OR
+                   Province = 'NL' OR
+                   Province = 'YK' OR
+                   Province = 'NU' OR
+                   Province = 'PE')
+                                    NOT NULL,
+    PostalCode      char(6)
+        CONSTRAINT CK_Customers_PostalCode
+            CHECK (PostalCode LIKE '[A-Z][0-9][A-Z][0-9][A-Z][0-9]')
+                                    NOT NULL,
+    PhoneNumber     char(13)
+        CONSTRAINT CK_Customers_PhoneNumber
+            CHECK (PhoneNumber LIKE '([0-9][0-9][0-9])[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]')
+                                        NULL  -- NULL means the data is optional
 )
 
 CREATE TABLE Orders
@@ -60,18 +83,33 @@ CREATE TABLE Orders
         CONSTRAINT PK_Orders_OrderNumber
             PRIMARY KEY
         IDENTITY(200, 1)                NOT NULL,
-    CustomerNumber  int                 NOT NULL,
+    CustomerNumber  int
+        -- Foreign Key constraints ensure that when a row of data is being
+        -- inserted or updated, there is a row in the referenced table
+        -- that has the same value as its Primary Key
+        CONSTRAINT FK_Orders_CustomerNumber_Customers_CustomerNumber
+            FOREIGN KEY REFERENCES
+            Customers(CustomerNumber)   NOT NULL,
     [Date]          datetime            NOT NULL,
-    Subtotal        money               NOT NULL,
-    GST             money               NOT NULL,
-    Total           money               NOT NULL
+    Subtotal        money
+        CONSTRAINT CK_Orders_Subtotal
+            CHECK (Subtotal > 0)        NOT NULL,
+    GST             money
+        CONSTRAINT CK_Orders_GST
+            CHECK (GST >= 0)            NOT NULL,
+    Total           AS Subtotal + GST   -- This is now a Computed Column
 )
 
 GO -- End of a batch of instructions
 
 -- Let's insert a few rows of data for the tables
 PRINT 'Inserting customer data'
-INSERT INTO Customers(FirstName, LastName, [Address], City, Province, PostalCode)
-    VALUES ('Clark', 'Kent', '344 Clinton Street', 'Metropolis', 'DE', 'S0S0N0')
-INSERT INTO Customers(FirstName, LastName, [Address], City, Province, PostalCode)
-    VALUES ('Jimmy', 'Olsen', '242 River Close', 'Bakerline', 'DE', 'B4K3R1')
+INSERT INTO Customers(FirstName, LastName, [Address], City, PostalCode)
+    VALUES ('Clark', 'Kent', '344 Clinton Street', 'Metropolis', 'S0S0N0')
+INSERT INTO Customers(FirstName, LastName, [Address], City, PostalCode)
+    VALUES ('Jimmy', 'Olsen', '242 River Close', 'Bakerline', 'B4K3R1')
+
+
+PRINT 'Inserting an order'
+INSERT INTO Orders(CustomerNumber, [Date], Subtotal, GST)
+    VALUES (100, GETDATE(), 17.45, 0.87)
