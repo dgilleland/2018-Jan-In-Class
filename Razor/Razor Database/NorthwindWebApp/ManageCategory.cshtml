@@ -25,6 +25,8 @@
         string catName = Request["catName"] ?? string.Empty;
         string catDescription = Request["catDescription"] ?? string.Empty;
         string submitType = Request["submitType"] ?? string.Empty;
+        HttpPostedFileBase catPic = null;
+
 
         var northwindDb = WebMatrix.Data.Database.Open("NorthwindDb");
         //var results = northwindDb.Query("SELECT CategoryID, CategoryName, Description, Picture, PictureMimeType FROM Categories");
@@ -34,8 +36,24 @@
             switch (submitType)
             {
                 case "Update":
-                    string updateStatement = "UPDATE Categories SET CategoryName = @0, Description = @1 WHERE CategoryID = @2";
-                    int rowsAffected = northwindDb.Execute(updateStatement, catName, catDescription, catId);
+                    string mimeType = null;
+                    byte[] catPicBytes = null;
+                    if (Request.Files.Count > 0)
+                    {
+                        catPic = Request.Files[0];
+                        string fileName = Path.GetFileName(catPic.FileName);
+                        mimeType = catPic.ContentType;
+                        catPicBytes = new byte[catPic.ContentLength];
+                        catPic.InputStream.Read(catPicBytes, 0, catPic.ContentLength);
+                        @*// Quickly show the image uploaded
+                        string base64String = Convert.ToBase64String(catPicBytes);
+                        string imageSrc = string.Format("data:{0};base64,{1}", mimeType, base64String);
+                        <text>
+                            <img src="@imageSrc" width="75" />
+                        </text>*@
+                    }
+                    string updateStatement = "UPDATE Categories SET CategoryName = @0, Description = @1, Picture = @2, PictureMimeType = @3 WHERE CategoryID = @4";
+                    int rowsAffected = northwindDb.Execute(updateStatement, catName, catDescription, catPicBytes, mimeType, catId);
                     if (rowsAffected == 0)
                     {
                         <div>Update failed. Try again or cancel.</div>
@@ -76,7 +94,13 @@
             }
         }
     }
-    <form method="post">
+    <!-- When your form will have an <input type="file" />,
+         then you will need to have the enctype attribute
+         on your <form> element. enctype means "Encoding Type"
+         - enctype="multipart/form-data"
+           No characters are encoded. This value is required when
+           you are using forms that have a file upload control.-->
+    <form method="post" enctype="multipart/form-data">
         <label>Name</label>
         <input name="catName" type="text" value="@catName" />
         <br />
@@ -85,6 +109,14 @@
         <br />
         <label>Picture</label>
         <input name="catPic" type="file" value="" />
+        @*@if (row.Picture != null)
+            {
+                string base64String = Convert.ToBase64String(row.Picture);
+                imageSrc = string.Format("data:{0};base64,{1}", row.PictureMimeType, base64String);
+                <text>
+                    <img src="@imageSrc" width="75" />
+                </text>
+            }*@
         <br />
         <fieldset class="buttons">
             <input name="submitType" type="submit" value="Update" />
