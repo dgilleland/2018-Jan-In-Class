@@ -25,7 +25,9 @@
         string catName = Request["catName"] ?? string.Empty;
         string catDescription = Request["catDescription"] ?? string.Empty;
         string submitType = Request["submitType"] ?? string.Empty;
-        HttpPostedFileBase catPic = null;
+        HttpPostedFileBase catPic = null; // Use this for insert/update
+        string mimeType = null; // Use this for insert/update as well as display
+        byte[] catPicBytes = null; // Use for insert/update as well as display
 
 
         var northwindDb = WebMatrix.Data.Database.Open("NorthwindDb");
@@ -33,27 +35,35 @@
         // See if this is a Post request (i.e. - they submitted the form)
         if (IsPost)
         {
+            // See if an image was included in the Posted form data
+            if (Request.Files.Count > 0)
+            {
+                catPic = Request.Files[0];
+                mimeType = catPic.ContentType;
+                catPicBytes = new byte[catPic.ContentLength];
+                catPic.InputStream.Read(catPicBytes, 0, catPic.ContentLength);
+            }
             switch (submitType)
             {
+                case "Add":
+                    string insertStatement = "INSERT INTO Categories(CategoryName, Description, Picture, PictureMimeType) VALUES(@0, @1, @2, @3)";
+                    northwindDb.Execute(insertStatement, catName, catDescription, catPicBytes, mimeType);
+                    var newId = northwindDb.QueryValue("SELECT SCOPE_IDENTITY()");
+                    catId = newId.ToString();
+                    break;
                 case "Update":
-                    string mimeType = null;
-                    byte[] catPicBytes = null;
-                    if (Request.Files.Count > 0)
+                    string updateStatement;
+                    int rowsAffected;
+                    if (catPicBytes != null)
                     {
-                        catPic = Request.Files[0];
-                        string fileName = Path.GetFileName(catPic.FileName);
-                        mimeType = catPic.ContentType;
-                        catPicBytes = new byte[catPic.ContentLength];
-                        catPic.InputStream.Read(catPicBytes, 0, catPic.ContentLength);
-                        @*// Quickly show the image uploaded
-                        string base64String = Convert.ToBase64String(catPicBytes);
-                        string imageSrc = string.Format("data:{0};base64,{1}", mimeType, base64String);
-                        <text>
-                            <img src="@imageSrc" width="75" />
-                        </text>*@
+                        updateStatement = "UPDATE Categories SET CategoryName = @0, Description = @1, Picture = @2, PictureMimeType = @3 WHERE CategoryID = @4";
+                        rowsAffected = northwindDb.Execute(updateStatement, catName, catDescription, catPicBytes, mimeType, catId);
                     }
-                    string updateStatement = "UPDATE Categories SET CategoryName = @0, Description = @1, Picture = @2, PictureMimeType = @3 WHERE CategoryID = @4";
-                    int rowsAffected = northwindDb.Execute(updateStatement, catName, catDescription, catPicBytes, mimeType, catId);
+                    else
+                    {
+                        updateStatement = "UPDATE Categories SET CategoryName = @0, Description = @1 WHERE CategoryID = @2";
+                        rowsAffected = northwindDb.Execute(updateStatement, catName, catDescription, catId);
+                    }
                     if (rowsAffected == 0)
                     {
                         <div>Update failed. Try again or cancel.</div>
@@ -74,11 +84,12 @@
                     break;
             }
         }
-        else
+        else // this is a GET request
         {
             int categoryId;
             if (int.TryParse(catId, out categoryId))
             {
+                // READ the data to display
                 // @0 is the first placeholder position
                 string query = "SELECT CategoryID, CategoryName, Description, Picture, PictureMimeType FROM Categories WHERE CategoryID = @0";
                 var result = northwindDb.QuerySingle(query, categoryId);
@@ -90,6 +101,8 @@
                 {
                     catName = result.CategoryName;
                     catDescription = result.Description;
+                    catPicBytes = result.Picture;
+                    mimeType = result.PictureMimeType;
                 }
             }
         }
@@ -109,22 +122,31 @@
         <br />
         <label>Picture</label>
         <input name="catPic" type="file" value="" />
-        @*@if (row.Picture != null)
+        @if (catPicBytes != null)
             {
-                string base64String = Convert.ToBase64String(row.Picture);
-                imageSrc = string.Format("data:{0};base64,{1}", row.PictureMimeType, base64String);
-                <text>
-                    <img src="@imageSrc" width="75" />
-                </text>
-            }*@
+                string base64String = Convert.ToBase64String(catPicBytes);
+                string imageSrc = string.Format("data:{0};base64,{1}", mimeType, base64String);
+            <text>
+                <img src="@imageSrc" width="75" />
+            </text>
+        }
         <br />
         <fieldset class="buttons">
-            <input name="submitType" type="submit" value="Update" />
-            <input name="submitType" type="submit" value="Delete" />
+            @if (string.IsNullOrWhiteSpace(catId))
+            {
+                <input name="submitType" type="submit" value="Add" />
+            }
+            else
+            {
+                <input name="submitType" type="submit" value="Update" />
+                <input name="submitType" type="submit" value="Delete" />
+            }
             <input name="submitType" type="submit" value="Cancel" />
             <input name="catId" type="hidden" value="@catId" />
         </fieldset>
     </form>
 </body>
+
+
 
 </html>
