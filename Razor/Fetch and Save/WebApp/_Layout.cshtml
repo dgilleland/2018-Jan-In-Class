@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>@Page.Title</title>
+        <link href="~/Styles/Site.css" runat="server" rel="stylesheet" />
+        @RenderSection("head", required: false)
+    </head>
+<body>
+    <main>@RenderBody()</main>
+    <aside>@RenderSection("aside", required: false)</aside>
+    <header>@RenderSection("pageHeader")</header>
+    <footer>@RenderSection("pageFooter", required: false)</footer>
+    <nav>@RenderPage("~/_Menu.cshtml")</nav>
+</body>
+</html>

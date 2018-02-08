@@ -1,0 +1,73 @@
+﻿@{
+    var queryRegionId = Request.QueryString["editId"];
+    if (string.IsNullOrEmpty(queryRegionId))
+    {
+        Page.Title = "Add Region";
+    }
+    else
+    {
+        Page.Title = "Edit Region " + queryRegionId;
+    }
+    Layout = "~/_Layout.cshtml";
+}
+
+@section pageHeader {
+    <h1>@Page.Title</h1>
+}
+
+@if (!string.IsNullOrEmpty(queryRegionId))
+{
+    var db = Database.Open("NW");
+    // I'll deal with the Update Command before selecting so that I will show the correct data
+    if (IsPost && Request.Form["command"] == "update")
+    {
+        try
+        {
+            queryRegionId = Request.Form["regionId"];
+            var description = Request.Form["description"];
+            var rowsAffected = db.Execute("UPDATE Region SET RegionDescription = @1 WHERE RegionID = @0", queryRegionId, description);
+            if (rowsAffected > 0)
+            {
+                <div>Update successful</div>
+            }
+            else
+            {
+                <div>Update failed</div>
+            }
+        }
+        catch (Exception ex)
+        {
+            <div>Error: @ex.Message</div>
+        }
+    }
+    var data = db.QuerySingle("SELECT RegionID, RegionDescription FROM Region WHERE RegionID = @0", queryRegionId);
+<form method="post">
+    <fieldset>
+        <legend>Edit Region</legend>
+        <label>Region ID:</label>
+        <input type="text" name="regionId" value="@data.RegionID" readonly="readonly" />
+
+        <label>Description: </label>
+        <input type="text" name="description" value="@data.RegionDescription" />
+    </fieldset>
+    <button type="submit" name="command" value="update">Update Region</button>
+    <button id="dangerDelete" type="submit" name="command" value="delete">Delete Region</button>
+    <script>
+        document.getElementById("dangerDelete").onclick = ConfirmDelete;
+        function ConfirmDelete() {
+            return confirm("Are you sure you wish to delete this region?");
+        }
+    </script>
+</form>
+}
+
+
+@section aside {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@Page.Title.</h1>
+            </hgroup>
+        </div>
+    </section>
+}

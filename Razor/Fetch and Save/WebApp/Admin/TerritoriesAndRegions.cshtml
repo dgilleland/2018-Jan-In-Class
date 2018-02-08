@@ -1,0 +1,69 @@
+﻿@{
+    Page.Title = "List Territories and Regions";
+    Layout = "~/_Layout.cshtml";
+
+    // Declare the Database object and get the data
+    var db = Database.Open("NW");
+    var regions = db.Query("SELECT RegionID, RegionDescription FROM Region");
+    var territories = db.Query("SELECT TerritoryID, TerritoryDescription, RegionID FROM Territories");
+    WebGrid regionGrid = new WebGrid(regions);
+}
+
+@section pageHeader {
+    <h1>@Page.Title</h1>
+}
+
+<div>
+    <h2>Regions</h2>
+    @regionGrid.GetHtml(tableStyle: "table",
+                        columns: regionGrid.Columns(
+                            regionGrid.Column(columnName: "RegionID", header: "Region ID"),
+                            regionGrid.Column(columnName: "RegionDescription", header: "Description"),
+                            regionGrid.Column(columnName: "RegionID", header: "Action",
+                                              format: @<text><a href="~/Admin/AddEditRegion.cshtml?editId=@item.RegionID">Edit</a></text>
+                            )))
+
+    <h2>Territories</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Territory ID</th>
+                <th>Description</th>
+                <th>Region (ID)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in territories)
+            {
+            <tr>
+                <td>@item.TerritoryID</td>
+                <td>@item.TerritoryDescription</td>
+                <td>@item.RegionID</td>
+                <td><a href="~/Admin/AddEditTerritory.cshtml?editId=@item.TerritoryID">Edit</a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section aside {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@Page.Title.</h1>
+                <h2>Northwind Trader's &ndash; Territories and Regions</h2>
+            </hgroup>
+            <p>In this sample, a WebGrid and a simple table are used to show lists of Territories and Regions. The lists include links to an add/edit page for each.</p>
+            <p>The SQL statements for selecting data for this page are:</p>
+            <pre><code>SELECT RegionID, RegionDescription FROM Region</code></pre>
+            <pre><code>SELECT TerritoryID, TerritoryDescription, RegionID FROM Territories</code></pre>
+        </div>
+    </section>
+}
+
+<style>
+    .table td, .table th {
+        padding: 2px 5px;
+    }
+</style>

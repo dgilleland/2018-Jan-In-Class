@@ -1,0 +1,20 @@
+﻿@{
+    Page.Title = "Destination Page";
+    Layout = "~/_Layout.cshtml";
+
+    var question = Request["securityQuestion"];
+    var answer = Request["securityAnswer"];
+}
+
+<h1>@Page.Title</h1>
+
+@{
+    if(string.IsNullOrEmpty(question) || string.IsNullOrEmpty(answer))
+    {
+        <p>You have not entered a security question and its answer</p>
+    }
+    else
+    {
+        <p>When asked "@question" on your password retrieval, be sure to answer "@answer".</p>
+    }
+}

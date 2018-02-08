@@ -1,0 +1,254 @@
+﻿@{
+    // Page Settings
+    Page.Title = "Manage Suppliers";
+    Layout = "~/_Layout.cshtml";
+
+}
+
+@section pageHeader {
+    <h1>@Page.Title</h1>
+}
+
+<div>
+    @{
+        // Form value variables
+        string command, selectedSupplier, supplierId, company, contact, contactTitle, address, city, region, postalCode, phone, fax, webTitle, webUrl;
+        // default value of null
+        selectedSupplier = supplierId = company = contact = contactTitle = address = city = region = postalCode = phone = fax = webTitle = webUrl = null;
+
+
+        // Open Northwind database
+        var db = Database.Open("NW");
+
+
+        // Process form actions
+        if (IsPost)
+        {
+            // Get the form values
+            command = Request.Form["command"];
+            selectedSupplier = Request.Form["selectedSupplier"];
+            supplierId = Request.Form["supplierId"];
+            company = Request.Form["companyName"];
+            contact = Request.Form["contact"];
+            contactTitle = Request.Form["contactTitle"];
+            address = Request.Form["address"];
+            city = Request.Form["city"];
+            region = Request.Form["region"];
+            postalCode = Request.Form["postalCode"];
+            phone = Request.Form["phone"];
+            fax = Request.Form["fax"];
+            webTitle = Request.Form["homePageTitle"];
+            webUrl = Request.Form["homePageUrl"];
+
+
+            switch (command)
+            {
+                case "select":
+                    // Look up selected supplier
+                    int searchId;
+                    if (int.TryParse(selectedSupplier, out searchId))
+                    {
+                        // Query the database
+                        string selectQuery = "SELECT SupplierID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Phone, Fax, HomePageTitle, HomePageUrl FROM Suppliers WHERE SupplierID = @0";
+                        try
+                        {
+                            var supplier = db.QuerySingle(selectQuery, searchId);
+                            // "Unpack" the data (most of which are strings)
+                            supplierId = supplier.SupplierID.ToString();
+                            company = supplier.CompanyName;
+                            contact = supplier.ContactName;
+                            contactTitle = supplier.ContactTitle;
+                            address = supplier.Address;
+                            city = supplier.City;
+                            region = supplier.Region;
+                            postalCode = supplier.PostalCode;
+                            phone = supplier.Phone;
+                            fax = supplier.Fax;
+                            webTitle = supplier.HomePageTitle;
+                            webUrl = supplier.HomePageUrl;
+                        }
+                        catch (Exception ex)
+                        {
+                            @DisplayMessage("Database Error: " + ex.Message, "error");
+                        }
+                    }
+                    else
+                    {
+                        @DisplayMessage("Please select a supplier before clicking [Select Supplier]", "info");
+                    }
+
+                    break;
+                case "insert":
+                    // Add supplier
+                    string insertCommand = "INSERT INTO Suppliers"
+                        + "(CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Phone, Fax, HomePageTitle, HomePageUrl)"
+                        + " VALUES ("
+                        + "  @0,          @1,      @2,           @3,      @4,   @5,      @6,        @7,    @8,  @9,            @10)";
+                    try
+                    {
+                        db.Execute(insertCommand, company, contact, contactTitle, address, city, region, postalCode, phone, fax, webTitle, webUrl);
+                        var newId = db.GetLastInsertId();
+                        selectedSupplier = newId.ToString(); // for drop-down
+                        supplierId = selectedSupplier;       // for input
+                    }
+                    catch (Exception ex)
+                    {
+                        @DisplayMessage("Database Error: " + ex.Message, "error");
+                    }
+                    break;
+                case "update":
+                    // Update supplier
+                    string updateCommand = " UPDATE Suppliers "
+                                         + " SET CompanyName = @1"
+                                         + "    ,ContactName = @2"
+                                         + "    ,ContactTitle = @3"
+                                         + "    ,Address = @4"
+                                         + "    ,City = @5"
+                                         + "    ,Region = @6"
+                                         + "    ,PostalCode = @7"
+                                         + "    ,Phone = @8"
+                                         + "    ,Fax = @9"
+                                         + "    ,HomePageTitle = @10"
+                                         + "    ,HomePageUrl = @11"
+                                         + " WHERE SupplierID = @0";
+                    try
+                    {
+                        int rowsAffected = db.Execute(updateCommand, supplierId, company, contact, contactTitle, address, city, region, postalCode, phone, fax, webTitle, webUrl);
+                        if (rowsAffected > 0)
+                        {
+                            @DisplayMessage("Update was successful", "success");
+                        }
+                        else
+                        {
+                            @DisplayMessage("Update did not happen", "info");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        @DisplayMessage("Database Error: " + ex.Message, "error");
+                    }
+                    break;
+                case "delete":
+                    // Delete supplier
+                    string deleteCommand = " DELETE Suppliers "
+                                         + " WHERE SupplierID = @0";
+                    try
+                    {
+                        int rowsAffected = db.Execute(deleteCommand, supplierId);
+                        if (rowsAffected > 0)
+                        {
+                            @DisplayMessage("Supplier has been deleted", "success");
+                        }
+                        else
+                        {
+                            @DisplayMessage("Unable to delete the supplier", "info");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        @DisplayMessage("Database Error: " + ex.Message, "error");
+                    }
+
+                    break;
+                default:
+                    // Invalid command
+                    @DisplayMessage("Unknown command", "error");
+
+                    break;
+            }
+        }
+
+
+        // Drop-Down data
+        string querySuppliers = "SELECT SupplierID, CompanyName FROM Suppliers ORDER BY CompanyName";
+        var allSuppliers = db.Query(querySuppliers);
+
+    }
+
+    <form method="post">
+        <label for="currentSuppliers">Current Suppliers</label>
+        <select id="currentSuppliers" name="selectedSupplier" class="ui-widget">
+            <option value="">[Select a Supplier]</option>
+            @foreach (var item in allSuppliers)
+            {
+            <option selected="@(selectedSupplier == item.SupplierID.ToString())"
+                    value="@item.SupplierID">
+                @item.CompanyName
+            </option>
+            }
+        </select>
+        <button type="submit" name="command" value="select">Select Supplier</button>
+
+        <fieldset>
+            <legend>Supplier Details</legend>
+
+            <label>Supplier ID</label>
+            <input type="text" name="supplierId" value="@supplierId" readonly="readonly" />
+
+            <label>Company Name</label>
+            <input type="text" name="companyName" value="@company" />
+
+            <label>Contact Name</label>
+            <input type="text" name="contact" value="@contact" />
+
+            <label>Contact Title</label>
+            <input type="text" name="contactTitle" value="@contactTitle" />
+
+            <label>Address</label>
+            <input type="text" name="address" value="@address" />
+
+            <label>City</label>
+            <input type="text" name="city" value="@city" />
+
+            <label>Region</label>
+            <input type="text" name="region" value="@region" />
+
+            <label>Postal Code</label>
+            <input type="text" name="postalCode" value="@postalCode" />
+
+            <label>Phone</label>
+            <input type="tel" name="phone" value="@phone" />
+
+            <label>Fax</label>
+            <input type="tel" name="fax" value="@fax" />
+
+            <label>Home Page Title</label>
+            <input type="text" name="homePageTitle" value="@webTitle" />
+
+            <label>Home Page Url</label>
+            <input type="url" name="homePageUrl" value="@webUrl" />
+        </fieldset>
+        <button type="submit" name="command" value="insert">Add New</button>
+        <button type="submit" name="command" value="update">Update Supplier</button>
+        <button type="submit" name="command" value="delete">Delete Supplier</button>
+    </form>
+</div>
+@helper DisplayMessage(string message, string displayAs)
+{
+    string className, icon;
+    switch(displayAs)
+    {
+        case "success":
+            className = "ui-state-success";
+            icon = "ui-icon-check";
+            break;
+        case "info":
+            className = "ui-state-highlight";
+            icon = "ui-icon-info";
+            break;
+        case "error":
+            className = "ui-state-error";
+            icon = "ui-icon-alert";
+            break;
+        default:
+            className = "";
+            icon = "";
+            break;
+    }
+    <div class="ui-widget" style="margin: .7em;">
+        <div class="@className ui-corner-all" style="padding: .7em;">
+            <span class="ui-icon @icon" style="float: left; margin-right: .3em;"></span>
+            @message
+        </div>
+    </div>
+}

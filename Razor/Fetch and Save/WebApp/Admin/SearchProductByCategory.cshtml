@@ -1,0 +1,54 @@
+﻿@{
+    Page.Title = "Search Products by Category";
+    Layout = "~/_Layout.cshtml";
+
+    var db = Database.Open("NW");
+    var allCategories = db.Query("SELECT CategoryID, CategoryName FROM Categories");
+}
+
+@section pageHeader {
+    <h1>@Page.Title</h1>
+}
+
+<div>
+    <form method="post">
+        Category:
+        <select name="selectedCategory">
+            <option value="">[Select a Category]</option>
+            @foreach (var item in allCategories)
+            {
+                <option value="@item.CategoryID">@item.CategoryName</option>
+            }
+        </select>
+        <button type="submit">Look up Products</button>
+    </form>
+    @if (IsPost)
+    {
+        <hr />
+        int catId;
+        // try to get a category ID from the drop-down
+        if (int.TryParse(Request.Form["selectedCategory"], out catId))
+        {
+            var products = db.Query("SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice, UnitsInStock FROM Products WHERE CategoryID = @0", catId);
+            // Create a WebGrid with the resulting data
+            var myGrid = new WebGrid(products);
+            <div>
+                <h3>Products</h3>
+                @myGrid.GetHtml(columns: myGrid.Columns(
+                    myGrid.Column(columnName: "ProductName",
+                                  header: "Product Name"),
+                    myGrid.Column(columnName: "QuantityPerUnit",
+                                  header: "Qty/Unit"),
+                    myGrid.Column(header: "Action",
+                                  columnName: "ProductID",
+                                  format: @<text><a href="~/Admin/ManageProducts.cshtml?editId=@item.ProductID">Edit</a></text>)
+               ))
+            </div>
+        }
+        else
+        {
+            <div>Please select a category before searching for products.</div>
+        }
+    }
+
+</div>

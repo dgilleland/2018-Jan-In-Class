@@ -1,0 +1,125 @@
+﻿@{
+    Page.Title = "Navigation with Data";
+    Layout = "~/_Layout.cshtml";
+}
+
+<style type="text/css">
+fieldset {
+    border-width: 2px;
+    border-style: groove;
+    border-color: threedface;
+    border-image: initial;
+    padding: 10px;
+}
+fieldset legend {
+    display: block; 
+    background-color: darkgray;
+    font-size: 1.1em;
+    font-style: italic;
+    color: white;
+    font-weight: bold;
+    padding: 2px;
+}
+</style>
+
+<h1>@Page.Title</h1>
+
+<form method="post" action="~/NavigationWithData/Destination.cshtml">
+    <fieldset>
+        <legend>Form with Action attribute</legend>
+        <label>Enter a security question:</label>
+        <input type="text" name="securityQuestion" list="defaultQuestions" class="wide" />
+        <label>Enter your standard answer to this question:</label>
+        <input type="text" name="securityAnswer" class="wide" />
+        <br />
+        <input type="submit" value="Post directly to the destination page" />
+    </fieldset>
+</form>
+
+<br /><br /><br /><br />
+
+<form method="post">
+    <fieldset>
+        <legend>Submit with FormAction attribute</legend>
+        <label>Enter a security question:</label>
+        <input type="text" name="securityQuestion" list="defaultQuestions" class="wide" />
+        <label>Enter your standard answer to this question:</label>
+        <input type="text" name="securityAnswer" class="wide" />
+        <br />
+        <input type="submit" value="Post directly to the destination page" formaction="~/NavigationWithData/Destination.cshtml" />
+    </fieldset>
+</form>
+
+<br /><br /><br /><br />
+
+<form method="post">
+    <fieldset>
+        <legend>Build a Query string link</legend>
+        <label>Enter a security question:</label>
+        <input type="text" name="securityQuestion_2" list="defaultQuestions" class="wide" />
+        <label>Enter your standard answer to this question:</label>
+        <input type="text" name="securityAnswer_2" class="wide" />
+        <br />
+        <input type="submit" value="Build a querystring link to destination page" />
+    </fieldset>
+    @if (IsPost)
+    {
+        var question = Request["securityQuestion_2"];
+        var answer = Request["securityAnswer_2"];
+        var link = @Href("~/NavigationWithData/Destination.cshtml?securityQuestion"
+                         + question + "&securityAnswer=" + @answer);
+        <a href="@link">Click this link</a>
+    }
+</form>
+
+<br /><br /><br /><br />
+
+<form method="post">
+    <fieldset>
+        <legend>Response.Redirect + Server.TransferRequest</legend>
+        <label>Enter a security question:</label>
+        <input type="text" name="securityQuestion" list="defaultQuestions" class="wide" />
+        <label>Enter your standard answer to this question:</label>
+        <input type="text" name="securityAnswer" class="wide" />
+        <br />
+        <input type="submit" value="Build a querystring link to destination page" />
+        <button type="submit" name="button_click" value="redirectMe">Just redirect me to the destination page.</button>
+    </fieldset>
+    @if (IsPost)
+    {
+        if ("redirectMe".Equals(Request["button_click"]))
+        {
+            // Note that this doesn't send any POST data - it's a simple GET request
+            Response.Redirect("~/NavigationWithData/Destination.cshtml");
+        }
+        else
+        {
+            Server.TransferRequest("~/NavigationWithData/Destination.cshtml", true);
+        }
+    }
+</form>
+
+
+<datalist id="defaultQuestions">
+    @foreach (string question in GetPasswordQuestions())
+    {
+        <option value="@question" />
+    }
+</datalist>
+
+@functions {
+    List<string> GetPasswordQuestions()
+    {
+        var questions = new List<string>();
+
+        questions.Add("What is the name of your first pet?");
+        questions.Add("What is the name of your elementary school?");
+        questions.Add("Who is your favorite teacher?");
+        questions.Add("When did you first enter this country?");
+        questions.Add("How many speeding tickets did you get in your first year of driving?");
+        questions.Add("Where did you grow up?");
+        questions.Add("Why are you asking?");
+        
+        return questions;
+    }
+}

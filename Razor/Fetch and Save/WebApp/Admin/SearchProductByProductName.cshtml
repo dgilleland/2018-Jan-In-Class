@@ -1,0 +1,56 @@
+﻿@{
+    Page.Title = "Search Product by Partial Product Name";
+    Layout = "~/_Layout.cshtml";
+}
+
+@section pageHeader {
+    <h1>@Page.Title</h1>
+}
+
+<div>
+    <form method="post">
+        <fieldset>
+            <legend>Search Form</legend>
+            <label>Product Name: </label>
+            <input type="search" name="partialName" placeholder="Partial name" />
+            <button type="submit">Search</button>
+        </fieldset>
+    </form>
+    @if (!IsPost)
+    {
+        <img src="http://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="Bobby Tables" title="http://xkcd.com/327/" />
+    }
+    else
+    {
+        var db = Database.Open("NW");
+        string query = "SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice, UnitsInStock FROM Products WHERE ProductName LIKE @0";
+        // In SQL, the % symbol is used as a wildcard to mean zero or more of any character.
+        // The effect we want is to search where "ProductName LIKE '%chai%'".
+        // Add the % to our user input instead of building the query manually.
+        string searchName = Request.Form["partialName"];
+        searchName = "%" + searchName + "%";
+
+        var results = db.Query(query, searchName);
+
+        // Output the results in an HTML table manually
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Qty/Unit</th>
+                <th>Price</th>
+                <th>In-Stock</th>
+            </tr>
+            @foreach (var row in results)
+            {
+                <tr>
+                    <td>@row.ProductID</td>
+                    <td>@row.ProductName</td>
+                    <td>@row.QuantityPerUnit</td>
+                    <td>@row.UnitPrice</td>
+                    <td>@row.UnitsInStock</td>
+                </tr>
+            }
+        </table>
+    }
+</div>

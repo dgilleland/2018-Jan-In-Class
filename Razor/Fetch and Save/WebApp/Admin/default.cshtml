@@ -1,0 +1,58 @@
+﻿@{
+    Page.Title = "Admin Page";
+    Layout = "~/_Layout.cshtml";
+}
+
+@section pageHeader {
+    <h1>
+        @Page.Title
+        <small> Demo forms for CRUD in Razor</small>
+    </h1>
+}
+
+<div>
+    <p>In this demo, we cover how to perform <b>C</b>reate, <b>R</b>ead, <b>U</b>date, and <b>D</b>elete operations on a per-table basis.</p>
+    <ol class="round">
+        <li class="one">
+            <b><a href="~/Admin/SearchProductByCategory.cshtml">Search Products by Category</a></b>
+            <br />
+            This page demos looking up data from the database and displaying the contents in a WebGrid. It includes customizing the WebGrid to generate links for each product that go to the <b>Manage Products</b> page passing the product id as a query string.
+        </li>
+
+        <li class="two">
+            <b><a href="~/Admin/SearchProductBySupplier.cshtml">Search Products by Supplier</a></b>
+            <br />
+            This is similar to the <b>Search Products by Category</b> page and is left for the student to generate. The SQL query to get the suppliers is <code>SELECT SupplierID, CompanyName FROM Suppliers ORDER BY CompanyName</code> and the SQL to get the products is <code>SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice, UnitsInStock FROM Products WHERE SupplierID = @@0</code>
+        </li>
+
+        <li class="three">
+            <b><a href="~/Admin/SearchProductByProductName.cshtml">Search Products by Partial Product name</a></b>
+            <br />
+            In this demo, we will see how to properly include SQL wildcards in a search within Razor.
+        </li>
+
+        <li class="four">
+            <b><a href="~/Admin/ManageProducts.cshtml">Manage Products</a></b>
+            <br />
+            This is a "catch-all" page that performs all CRUD operations on the Products (including handling query string page-redirects from other pages).
+        </li>
+
+        <li class="five">
+            <b><a href="~/Admin/ManageCategories.cshtml">Manage Categories</a></b>
+            <br />
+            In this sample, we see a CRUD page that manages categories, including handling the display of images from the database and uploading images.
+        </li>
+
+        <li class="six">
+            <b><a href="~/Admin/ManageSuppliers.cshtml">Manage Suppliers</a></b>
+            <br />
+            In this sample, the Suppliers are maintained in a simple CRUD form.
+        </li>
+
+        <li class="seven">
+            <b><a href="~/Admin/TerritoriesAndRegions.cshtml">Territories and Regions</a></b>
+            <br />
+            In this sample, a WebGrid and a simple table are used to show lists of Territories and Regions. The lists include links to an add/edit page for each.
+        </li>
+    </ol>
+</div>
