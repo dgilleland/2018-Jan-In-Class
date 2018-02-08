@@ -57,3 +57,6 @@ To make this legend appear correctly in MarkDown, include the following style ma
 
 The `.gitignore` contents were supplied from [GitIgnore.io](https://gitignore.io). The `.gitattributes` contents were supplied from [GitAttributes.io](https://gitattributes.io).
 
+----
+
+{% include "SUMMARY.md" %}

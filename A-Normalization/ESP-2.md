@@ -1,6 +1,6 @@
 # ESP Document 2
 
-The second specifications document for Emergency Service & Product (ESP) presented one additional paper-based form: **Customer Payments Against Orders**. This portion of the sample lab solution details how this form was analyzed and into an integrated database design. The styling conforms to the associated [Legend.md](normalization legend).
+The second specifications document for Emergency Service & Product (ESP) presented one additional paper-based form: **Customer Payments Against Orders**. This portion of the sample lab solution details how this form was analyzed. The styling conforms to the associated [Legend.md](normalization legend).
 
 ## Customer Payments Against Orders
 
@@ -38,7 +38,7 @@ After examining the *PaymentLogDetails*, there were no changes.
 
 ### 3NF
 
-After performing Third-Normal Form, a two tables were generated: Customer, and **Payment**.
+After performing Third-Normal Form, two tables were generated: **Customer**, and **Payment**.
 
 **Customer:** (<b class="pk">CustomerNumber</b>, FirstName, LastName)
 
@@ -57,6 +57,8 @@ These are the tables/entities after normalizing the Payment Log View.
 **PaymentLogDetails:** (<b class="pk"><u class="fk">OrderNumber</u>, PaymentNumber</b>, Date, PaymentAmount, PaymentType, BalanceOwing, DepositBatchNumber)
 
 ### ERD
+
+The following ERD for the *Payment Log View* is based on the final 3<sup>rd</sup> normal form.
 
 ![](ESP-2-ERD-PaymentLogView.png)
 
