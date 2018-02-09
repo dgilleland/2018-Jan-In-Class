@@ -77,7 +77,7 @@ body > main {
         {
             var question = Request["securityQuestion_2"];
             var answer = Request["securityAnswer_2"];
-            var link = @Href("~/NavigationWithData/Destination.cshtml?securityQuestion"
+            var link = @Href("~/NavigationWithData/Destination.cshtml?securityQuestion="
                              + question + "&securityAnswer=" + @answer);
             <a href="@link">Click this link</a>
         }
@@ -103,7 +103,7 @@ body > main {
             // Note that this doesn't send any POST data - it's a simple GET request
             Response.Redirect("~/NavigationWithData/Destination.cshtml");
         }
-        else if (submitValue == "redirectMe")
+        else if (submitValue == "transferMe")
         {
             Server.TransferRequest("~/NavigationWithData/Destination.cshtml", true);
         }
