@@ -6,7 +6,11 @@
     var answer = Request["securityAnswer"];
 }
 
-<h1>@Page.Title</h1>
+
+@section pageHeader {
+    <h1>@Page.Title</h1>
+}
+
 
 @{
     if(string.IsNullOrEmpty(question) || string.IsNullOrEmpty(answer))

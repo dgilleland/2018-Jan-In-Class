@@ -4,14 +4,21 @@
 }
 
 <style type="text/css">
+    form {
+        margin-bottom: 50px;
+        display: block;
+    }
 fieldset {
     border-width: 2px;
     border-style: groove;
     border-color: threedface;
     border-image: initial;
     padding: 10px;
+
+    display: grid;
+    grid-template-columns: auto 175px;
 }
-fieldset legend {
+legend {
     display: block; 
     background-color: darkgray;
     font-size: 1.1em;
@@ -20,9 +27,16 @@ fieldset legend {
     font-weight: bold;
     padding: 2px;
 }
+body > main {
+    columns: 2;
+}
 </style>
 
-<h1>@Page.Title</h1>
+
+@section pageHeader {
+    <h1>@Page.Title</h1>
+}
+
 
 <form method="post" action="~/NavigationWithData/Destination.cshtml">
     <fieldset>
@@ -36,8 +50,6 @@ fieldset legend {
     </fieldset>
 </form>
 
-<br /><br /><br /><br />
-
 <form method="post">
     <fieldset>
         <legend>Submit with FormAction attribute</legend>
@@ -50,7 +62,7 @@ fieldset legend {
     </fieldset>
 </form>
 
-<br /><br /><br /><br />
+<br style="break-after:column;"/>
 
 <form method="post">
     <fieldset>
@@ -61,18 +73,16 @@ fieldset legend {
         <input type="text" name="securityAnswer_2" class="wide" />
         <br />
         <input type="submit" value="Build a querystring link to destination page" />
+        @if (IsPost)
+        {
+            var question = Request["securityQuestion_2"];
+            var answer = Request["securityAnswer_2"];
+            var link = @Href("~/NavigationWithData/Destination.cshtml?securityQuestion"
+                             + question + "&securityAnswer=" + @answer);
+            <a href="@link">Click this link</a>
+        }
     </fieldset>
-    @if (IsPost)
-    {
-        var question = Request["securityQuestion_2"];
-        var answer = Request["securityAnswer_2"];
-        var link = @Href("~/NavigationWithData/Destination.cshtml?securityQuestion"
-                         + question + "&securityAnswer=" + @answer);
-        <a href="@link">Click this link</a>
-    }
 </form>
-
-<br /><br /><br /><br />
 
 <form method="post">
     <fieldset>
@@ -82,17 +92,18 @@ fieldset legend {
         <label>Enter your standard answer to this question:</label>
         <input type="text" name="securityAnswer" class="wide" />
         <br />
-        <input type="submit" value="Build a querystring link to destination page" />
-        <button type="submit" name="button_click" value="redirectMe">Just redirect me to the destination page.</button>
+        <button type="submit" name="button_click" value="redirectMe">Redirect me to the destination page.</button>
+        <button type="submit" name="button_click" value="transferMe">Transfer me to the destination page.</button>
     </fieldset>
     @if (IsPost)
     {
-        if ("redirectMe".Equals(Request["button_click"]))
+        var submitValue = Request["button_click"];
+        if (submitValue == "redirectMe")
         {
             // Note that this doesn't send any POST data - it's a simple GET request
             Response.Redirect("~/NavigationWithData/Destination.cshtml");
         }
-        else
+        else if (submitValue == "redirectMe")
         {
             Server.TransferRequest("~/NavigationWithData/Destination.cshtml", true);
         }
