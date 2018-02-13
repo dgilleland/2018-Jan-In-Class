@@ -20,6 +20,10 @@ GO  -- this statement helps to "separate" various DDL statements in our script
     -- so that they are executed as "blocks" of code.
 
 /* DROP TABLE statements (to "clean up" the database for re-creation)  */
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'OrderDetails')
+    DROP TABLE OrderDetails
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'InventoryItems')
+    DROP TABLE InventoryItems
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Orders')
     DROP TABLE Orders
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Customers')
@@ -100,8 +104,127 @@ CREATE TABLE Orders
     Total           AS Subtotal + GST   -- This is now a Computed Column
 )
 
+CREATE TABLE InventoryItems
+(
+    ItemNumber          varchar(5)
+        CONSTRAINT PK_InventoryItems_ItemNumber
+            PRIMARY KEY                     NOT NULL,
+    ItemDescription     varchar(50)             NULL,
+    CurrentSalePrice    money
+        CONSTRAINT CK_InventoryItems_CurrentSalePrice
+            CHECK (CurrentSalePrice > 0)    NOT NULL,
+    InStockCount        int                 NOT NULL,
+    ReorderLevel        int                 NOT NULL
+)
+
+CREATE TABLE OrderDetails
+(
+    OrderNumber     int
+        CONSTRAINT FK_OrderDetails_OrderNumber_Orders_OrderNumber
+            FOREIGN KEY REFERENCES
+            Orders(OrderNumber)         NOT NULL,
+    ItemNumber      varchar(5)
+        CONSTRAINT FK_OrderDetails_ItemNumber_InventoryItems_ItemNumber
+            FOREIGN KEY REFERENCES
+            InventoryItems(ItemNumber)  NOT NULL,
+    Quantity        int
+        CONSTRAINT DF_OrderDetails_Quantity
+            DEFAULT (1)
+        CONSTRAINT CK_OrderDetails_Quantity
+            CHECK (Quantity > 0)        NOT NULL,
+    SellingPrice    money
+        CONSTRAINT CK_OrderDetails_SellingPrice
+            CHECK (SellingPrice >= 0)   NOT NULL,
+    -- The Amount column is a CALCULATED (or "derived") column.
+    -- It's value is the result of multiplying Quantity by SellingPrice.
+    Amount          AS Quantity * SellingPrice  ,
+    -- The following is a Table Constraint
+    -- A composite primary key MUST be done as a Table Constraint
+    -- because it involves two or more columns
+    CONSTRAINT PK_OrderDetails_OrderNumber_ItemNumber
+        PRIMARY KEY (OrderNumber, ItemNumber) -- Specify all the columns in the PK
+)
+
+/* ***************************
+ * Change Requests for Spec 1
+ *  Perform table changes through ALTER statements.
+ *  Syntax for ALTER TABLE can be found at
+ *      http://msdn.microsoft.com/en-us/library/ms190273.aspx
+ *  ALTER TABLE statements allow us to change an existing table without
+ *  having ot drop it or lose information in the table
+ * **************************/
+
+-- A) Allow Address, City, Province, and Postal Code to be NULL
+--    SQL requires each column to be altered SEPARATELY.
+ALTER TABLE Customers
+    ALTER COLUMN [Address] varchar(40) NULL
+GO -- this statement helps to "separate" various DDL statements in our script. It's optional.
+
+ALTER TABLE Customers
+    ALTER COLUMN City varchar(35) NULL
+GO
+
+ALTER TABLE Customers
+    ALTER COLUMN Province char(2) NULL
+GO
+
+ALTER TABLE Customers
+    ALTER COLUMN PostalCode char(6) NULL
+GO
+
+-- B) Add a check constraint on the First and Last name to require at least two letters.
+--    % is a wildcard for zero or more characters (letter, digit, or other character)
+--    _ is a wildcard for a single character (letter, digit, or other character)
+--    [] are used to represent a range or set of characters that are allowed
+IF OBJECT_ID('CK_Customers_FirstName', 'C') IS NOT NULL -- 'C' specifies that I'm looking for a constraint
+    ALTER TABLE Customers DROP CONSTRAINT CK_Customers_FirstName
+
+ALTER TABLE Customers
+    ADD CONSTRAINT CK_Customers_FirstName
+        CHECK (FirstName LIKE '[A-Z][A-Z]%')
+
+-- C) Add a default constraint on the Orders.Date column to use the current date.
+-- GETDATE() is a global function in the SQL Server Database
+-- GETDATE() will obtain the current date/time on the database server
+IF OBJECT_ID('DF_Orders_Date', 'C') IS NOT NULL
+    ALTER TABLE Orders DROP CONSTRAINT DF_Orders_Date
+
+ALTER TABLE Orders
+    ADD CONSTRAINT DF_Orders_Date
+        DEFAULT GETDATE() FOR [Date]
+--      Use     \ this  / for \this column/ if no value was supplied when INSERTING data
+GO
+
+-- D) Change the InventoryItems.ItemDescription column to be NOT NULL
+--    WAIT!! We have described the ItemDescription as allowing NULL values.
+--           That means we might have data in the table where the
+--           ItemDescription doesn't exist.
+--           If we try to make that column NOT NULL, what will we do about
+--           the existing data in the database where it is "empty"??
+--           We can fix that by updating the data in the database
+--           where that description is missing.
+UPDATE      InventoryItems
+   SET      ItemDescription = '-missing-'
+   WHERE    ItemDescription IS NULL
+GO
+--   Now we can change the ItemDescription to be required (NOT NULL)
+ALTER TABLE InventoryItems
+    ALTER COLUMN ItemDescription varchar(50) NOT NULL
+GO
+
+-- E) Add indexes to the Customer's First and Last Name columns
+--    as well as to the Item's Description column.
+-- Indexes improve the performance of the database when retrieving information.
+CREATE NONCLUSTERED INDEX IX_Customers_FirstName
+    ON Customers (FirstName)
+CREATE NONCLUSTERED INDEX IX_Customers_LastName
+    ON Customers (LastName)
+CREATE NONCLUSTERED INDEX IX_InventoryItems_ItemDescription
+    ON InventoryItems (ItemDescription)
 GO -- End of a batch of instructions
 
+
+-- TODO: We will move the INSERT statements to another part of the script
 -- Let's insert a few rows of data for the tables
 PRINT 'Inserting customer data'
 INSERT INTO Customers(FirstName, LastName, [Address], City, PostalCode)
