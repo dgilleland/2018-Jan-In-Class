@@ -9,10 +9,18 @@
     short inStock, onOrder, reorderLevel;
     bool isDiscontinued;
 
+    // 0) Set up page validation
+    Validation.RequireField("productName", "Product name is required");
+    Validation.Add("productName", Validator.StringLength(40, 5, "Product name must be between 5 and 40 characters long."));
+    Validation.Add("inStock", Validator.Integer("In-stock values must be whole numbers"));
+    Validation.Add("inStock", Validator.Range(0, short.MaxValue, "In-stock quantities must be greater than or equal to zero"));
+
+
     // Pull the data from the Request.Form collection
     // 1) The selected product ID and the command
     string current = Request.Form["currentProducts"];
     string command = Request.Form["command"];
+
     // 2) The data on the product entered into the form
     pid = Request.Form["productId"];
     productName = Request.Form["productName"];
@@ -27,6 +35,12 @@
     isDiscontinued = !string.IsNullOrEmpty(disc);
 
     var db = Database.Open("NW");
+
+    // Add Product
+    if(IsPost && Validation.IsValid())
+    {
+        // Process the form's validation
+    }
 
     if(IsPost || !string.IsNullOrEmpty(Request.QueryString["editId"]))
     {
@@ -93,6 +107,7 @@
 
     <fieldset>
         <legend>Product Details</legend>
+        <div>@Html.ValidationSummary()</div>
         Product Id <input type="text" name="productId" value="@pid" disabled /><br />
         Product name <input type="text" name="productName" value="@productName" /><br />
 
