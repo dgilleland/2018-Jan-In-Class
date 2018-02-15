@@ -339,6 +339,11 @@ UPDATE InventoryItems
    SET CurrentSalePrice = CurrentSalePrice * 0.02
 WHERE  CurrentSalePrice BETWEEN 10 AND 30
 
+-- Update the prices for all belts by $5.50, because of newly introduced recyling fees
+UPDATE InventoryItems
+   SET CurrentSalePrice = CurrentSalePrice + 5.5
+WHERE  ItemDescription LIKE '%Belt%'
+
 --    And, we want to get rid of some inventory
 DELETE FROM InventoryItems
 WHERE  ItemNumber IN ('GR47D', 'KD5-Q')
