@@ -11,4 +11,4 @@ Go to the appropriate branch, depending on your section:
 
 ----
 
-![](https://xkcd.com/554/)
+[![](https://imgs.xkcd.com/comics/not_enough_work.png)](https://xkcd.com/554/)
