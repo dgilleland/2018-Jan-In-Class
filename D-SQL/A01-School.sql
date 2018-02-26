@@ -2,11 +2,11 @@
    Table Creation and Load Data Script 
    **************************************** */
 
--- create database [A01-School]
-go
+-- CREATE DATABASE [A01-School]
+GO
 
-use [A01-School]
-go
+USE [A01-School]
+GO
 
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Payment')
   DROP TABLE  Payment
@@ -156,8 +156,8 @@ go
 
 /* School158 Data Inserts */
 
-use IQSchool
-go
+USE [A01-School]
+GO
 
 delete from Payment
 delete from PaymentType
