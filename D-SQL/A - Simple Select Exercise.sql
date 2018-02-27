@@ -92,3 +92,19 @@ WHERE   R.Mark BETWEEN 70 AND 80
 SELECT  R.StudentID, R.CourseId, R.Mark
 FROM    Registration R
 WHERE   R.Mark = 80 OR R.Mark = 85
+
+-- The next two questions introduce the idea of "wildcards" and pattern matching in the WHERE clause
+-- _ is a wildcard for a single character
+-- % is a wildcard for zero or more characters
+-- [] is a pattern for a single character matching the pattern in the square brackets
+--9. Select the students first and last names who have last names starting with S
+
+--10. Select Coursenames whose CourseID  have a 1 as the fifth character
+
+--11. Select the CourseID's and Coursenames where the CourseName contains the word 'programming'
+
+--12. Select all the ClubNames who start with N or C.
+
+--13. Select Student Names, Street Address and City where the lastName has only 3 letters long.
+
+--14. Select all the StudentID's where the PaymentAmount < 500 OR the PaymentTypeID is 5
