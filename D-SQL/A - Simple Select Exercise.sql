@@ -20,7 +20,7 @@ SELECT  ClubId, ClubName
 FROM    Club
   -- Pro-Tip: If you write the FROM clause before specifying the columns,
   --            you will get Intellisense help on the column names
-  -- Pro-Tip: Press [ctrl] + [shift] + r to "refresh" intellisens
+  -- Pro-Tip: Press [ctrl] + [shift] + r to "refresh" intellisense
 
 -- 2.   Select the FirstNames and LastNames of all the students
 SELECT  FirstName, LastName
