@@ -98,13 +98,20 @@ WHERE   R.Mark = 80 OR R.Mark = 85
 -- % is a wildcard for zero or more characters
 -- [] is a pattern for a single character matching the pattern in the square brackets
 --9. Select the students first and last names who have last names starting with S
+SELECT  FirstName, LastName
+FROM    Student
+WHERE   LastName LIKE 'S%'
 
---10. Select Coursenames whose CourseID  have a 1 as the fifth character
+--10. Select Coursenames whose CourseID have a 1 as the fifth character
+SELECT  CourseName
+FROM    Course
+WHERE   CourseID LIKE '____1%' -- four underscores, 1, %
+--                     DMIT158
 
 --11. Select the CourseID's and Coursenames where the CourseName contains the word 'programming'
 
 --12. Select all the ClubNames who start with N or C.
 
---13. Select Student Names, Street Address and City where the lastName has only 3 letters long.
+--13. Select Student Names, Street Address and City where the lastName is only 3 letters long.
 
 --14. Select all the StudentID's where the PaymentAmount < 500 OR the PaymentTypeID is 5
