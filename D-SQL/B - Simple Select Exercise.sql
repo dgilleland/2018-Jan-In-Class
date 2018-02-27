@@ -2,7 +2,7 @@
 -- This set of exercises demonstrates performing simple Aggregate functions
 -- to get results such as SUM(), AVG(), COUNT() 
 -- All aggregates are done using built-in functions in the database
-Use IQSCHOOL
+Use [A01-School]
 GO
 
 --1.	Select the average Mark from all the Marks in the registration table
