@@ -12,10 +12,18 @@ namespace WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+            {
+                // Populate the GridView
+                FleetGrid.DataSource = Fleet;
+                FleetGrid.DataBind();
+            }
         }
 
+        // Static "hack" allows the list of ships to persist on postback
+        // Don't ever use this in real life!
         private static List<Ship> Fleet = new List<Ship>();
+
         protected void AddShip_Click(object sender, EventArgs e)
         {
             // Get the data from the form & put it into a new Ship object
@@ -27,11 +35,20 @@ namespace WebApp
             // Populate the GridView
             FleetGrid.DataSource = Fleet;
             FleetGrid.DataBind();
+
+            MessageLabel.Text = "Ship Added";
         }
 
         protected void ClearForm_Click(object sender, EventArgs e)
         {
+            Registry.Text = string.Empty;
+            ShipClass.SelectedIndex = 0;
+            Fleet.Clear();
+            // Populate the GridView
+            FleetGrid.DataSource = Fleet;
+            FleetGrid.DataBind();
 
+            MessageLabel.Text = "Fleet Scrapped.";
         }
     }
 }
