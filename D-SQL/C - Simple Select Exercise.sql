@@ -70,5 +70,9 @@ GROUP BY PaymentTypeID
 --8. How many students are there in each club? Show the clubID and the count
 -- TODO: Student Answer Here....
 
+-- Check your answer by manually grouping students by their club membership and counting them
+SELECT  ClubId, StudentID
+FROM    Activity
+
 --9. Which clubs have 3 or more students in them?
 -- TODO: Student Answer Here....
