@@ -3,7 +3,11 @@ USE [A01-School]
 GO
 
 --1.	Select Student full names and the course ID's they are registered in.
-
+SELECT  FirstName + ' ' + LastName AS 'Full Name',
+        CourseId
+FROM    Student
+    INNER JOIN Registration
+        ON Student.StudentID = Registration.StudentID
 
 --1.a. Select Student full names, the course ID and the course name that the students are registered in.
 
