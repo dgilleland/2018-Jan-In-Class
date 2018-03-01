@@ -17,7 +17,9 @@
                 <asp:TextBox runat="server" ID="TextBox1" />
 
                 <asp:Label ID="Label2" runat="server" AssociatedControlID="TextBox2">TextBox - Password</asp:Label>
-                <asp:TextBox runat="server" ID="TextBox2" TextMode="Password" />
+                <asp:TextBox runat="server" ID="TextBox2" TextMode="Password"
+                     BackColor="YellowGreen" ForeColor="Orange" 
+                     Font-Italic="true" />
 
                 <asp:Label ID="Label3" runat="server" AssociatedControlID="TextBox3">TextBox - Number</asp:Label>
                 <asp:TextBox runat="server" ID="TextBox3" TextMode="Number" />

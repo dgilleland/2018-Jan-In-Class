@@ -11,7 +11,9 @@ namespace WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            TextBox1.BackColor = System.Drawing.Color.Bisque;
+            TextBox1.ForeColor = System.Drawing.Color.Pink;
+            TextBox1.Font.Bold = true;
         }
 
         protected void ProcessTextboxes_Click(object sender, EventArgs e)
