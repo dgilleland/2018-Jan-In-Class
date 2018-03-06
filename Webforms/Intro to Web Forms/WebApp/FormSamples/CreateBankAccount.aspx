@@ -61,6 +61,16 @@
                     ErrorMessage="Overdraft Limit must be greater than or equal to zero." 
                     ValueToCompare="0" Operator="GreaterThanEqual" Type="Currency"></asp:CompareValidator>
             </div>
+
+            <p>To complete this sample in class, do the following:</p>
+            <ul>
+                <li>Create a C# class to represent the Bank Account information entered in this form.</li>
+                <li>Add a GridView control to this form.</li>
+                <li>In the code-behind, add a <code>static List&lt;BankAccount&gt;</code> property to hold the bank account information.</li>
+                <li>Complete the <code>Submit_Click()</code> method to add the bank account to the GridView. Check the Validation Controls, and also do a "manual check" in C# to ensure that there are no duplicate account numbers in the list.</li>
+            </ul>
+            <p>In addition, do a manual code-behind check of the AgreeToTerms checkbox.</p>
+
         </div>
     </div>
     <script src="../Scripts/bootwrap-freecode.js"></script>
