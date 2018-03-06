@@ -51,17 +51,13 @@
     
     GETDATE ()                  returns the system date
     
-    DATEADD (xx, n, date1)      returns a new date adding the number of xx to date1
-    n may be negative
+    DATEADD (xx, n, date1)      returns a new date adding the number of xx to date1; n may be negative
     
     DATEDIFF (xx, date1, date2) returns the number of xx from date1 (older) to date2 (newer) – can return negative numbers
     
     DATENAME (xx, date1)        returns a string representation of the xx of date1
     
     DATEPART (xx, date1)        returns an integer representation of the xx of date1
-    
-    DATENAME (xx, date1)        returns a string representation of the xx of date1
-    
     
     YEAR (date1)                returns the year portion of date1, same functionality as DATEPART (yy, date1)
     
