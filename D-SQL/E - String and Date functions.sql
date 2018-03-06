@@ -1,19 +1,38 @@
 -- String and Date Functions Exercise
+USE [A01-School]
+GO
 
 -- 1. Select the staff names and the name of the month they were hired
-
+SELECT  FirstName, LastName, DATENAME(mm, DateHired) AS 'Month Hired'
+FROM    Staff
 
 -- 2. How many days did Tess Agonor work for the school?
+SELECT  DATEDIFF(dd, DateHired, DateReleased)
+FROM    Staff
+WHERE   FirstName = 'Tess'
+  AND   Lastname = 'Agonor'
 
+-- 2a. How long have I worked for this school??
+SELECT  DATEDIFF(dd, 'Jan 1, 2000', GETDATE())
 
 -- 3. How Many Students where born in each month? Display the Month Name and the Number of Students.
-
+SELECT  DATENAME(mm, Birthdate) AS 'Month Name',
+        COUNT(1) AS 'Number of Students'
+FROM    Student
+GROUP BY DATENAME(mm, Birthdate)
 
 -- 4. Select the Names of all the students born in December.
-
+SELECT  FirstName, LastName
+FROM    Student
+WHERE   DATENAME(mm, Birthdate) = 'December'
 
 -- 5. Select all the course names that have grades from 2004. NOTE: the first 4 characters of the semester indicate the year.
-
+SELECT  DISTINCT
+        CourseName
+FROM    Registration R
+    INNER JOIN Course C ON C.CourseId = R.CourseId
+WHERE   Mark IS NOT NULL
+  AND   LEFT(Semester, 4) = 2004
 
 -- 6. select last three characters of all the courses
 
