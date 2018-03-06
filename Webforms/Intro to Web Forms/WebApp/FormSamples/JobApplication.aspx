@@ -58,7 +58,7 @@
             <ul>
                 <li>Name is required.</li>
                 <li>Email must be in the correct format: <code>\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*</code></li>
-                <li>Phone is required, and must be in the correct format: (###)###-#### &nbsp;&nbsp;<code>\(\d{3}\)?\s\d{3}-\d{4}</code></li>
+                <li>Phone is required, and must be in the correct format: (###)###-#### &nbsp;&nbsp;<code>\(\d{3}\)\s?\d{3}-\d{4}</code></li>
                 <li>Full/Part Time must be chosen (it's required).</li>
             </ul>
         </div>
