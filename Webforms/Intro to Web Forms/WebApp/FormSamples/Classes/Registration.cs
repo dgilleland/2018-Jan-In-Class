@@ -12,7 +12,7 @@ namespace AssortedDemos
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public long SIN { get; set; }
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
         public string StudyProgram { get; set; }
         public int SchoolYear { get; set; }
     }
