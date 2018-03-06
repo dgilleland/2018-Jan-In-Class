@@ -172,4 +172,13 @@ public partial class FormSamples_CreateBankAccount {
     /// To modify move field declaration from designer file to code-behind file.
     /// </remarks>
     protected global::System.Web.UI.WebControls.CompareValidator ValidateOverdraftLimit;
+    
+    /// <summary>
+    /// BankAccountGridView control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.GridView BankAccountGridView;
 }

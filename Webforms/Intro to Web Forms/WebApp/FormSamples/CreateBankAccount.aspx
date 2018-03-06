@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="false" Inherits="FormSamples_CreateBankAccount" Codebehind="CreateBankAccount.aspx.cs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" Inherits="FormSamples_CreateBankAccount" Codebehind="CreateBankAccount.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="page-header">
@@ -61,6 +61,9 @@
                     ErrorMessage="Overdraft Limit must be greater than or equal to zero." 
                     ValueToCompare="0" Operator="GreaterThanEqual" Type="Currency"></asp:CompareValidator>
             </div>
+
+            <asp:GridView ID="BankAccountGridView" runat="server"
+                 EmptyDataText="No bank accounts entered"></asp:GridView>
 
             <p>To complete this sample in class, do the following:</p>
             <ul>
