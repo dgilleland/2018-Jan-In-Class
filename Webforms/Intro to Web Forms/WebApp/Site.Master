@@ -54,6 +54,12 @@
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="DemoWebControls.aspx">Demo Web Controls</a></li>
                         <li><a runat="server" href="DemoFleet.aspx">Demo Simple GridView</a></li>
+                        <li><a runat="server" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Entry <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" href="~/FormSamples/Default.aspx">Demos</a></li>
+                                <li><a runat="server" href="~/Practice/Default.aspx">Practice</a></li>
+                            </ul>
+                        </li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>

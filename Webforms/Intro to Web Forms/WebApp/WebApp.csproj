@@ -129,6 +129,18 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="FormSamples\ContestEntry.aspx" />
+    <Content Include="FormSamples\CreateBankAccount.aspx" />
+    <Content Include="FormSamples\Default.aspx" />
+    <Content Include="FormSamples\JobApplication.aspx" />
+    <Content Include="FormSamples\StudentEnrollment.aspx" />
+    <Content Include="Images\CD Library %28Alternate 847c%29.png" />
+    <Content Include="Images\CD Library.png" />
+    <Content Include="Images\Movie Library %28Alternate 368q%29.png" />
+    <Content Include="Images\Movie Library.png" />
+    <Content Include="Images\User Registration %28Alternate 263h%29.png" />
+    <Content Include="Images\User Registration.png" />
+    <Content Include="Practice\Default.aspx" />
     <Content Include="Sandbox.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -221,8 +233,51 @@
     <Compile Include="DemoWebControls.aspx.designer.cs">
       <DependentUpon>DemoWebControls.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FormSamples\Classes\Registration.cs" />
+    <Compile Include="FormSamples\ContestEntry.aspx.cs">
+      <DependentUpon>ContestEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormSamples\ContestEntry.aspx.designer.cs">
+      <DependentUpon>ContestEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormSamples\CreateBankAccount.aspx.cs">
+      <DependentUpon>CreateBankAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormSamples\CreateBankAccount.aspx.designer.cs">
+      <DependentUpon>CreateBankAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormSamples\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormSamples\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormSamples\JobApplication.aspx.cs">
+      <DependentUpon>JobApplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormSamples\JobApplication.aspx.designer.cs">
+      <DependentUpon>JobApplication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormSamples\StudentEnrollment.aspx.cs">
+      <DependentUpon>StudentEnrollment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormSamples\StudentEnrollment.aspx.designer.cs">
+      <DependentUpon>StudentEnrollment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Practice\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Practice\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sandbox.aspx.cs">
