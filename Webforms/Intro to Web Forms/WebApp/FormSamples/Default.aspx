@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" Runat="Server">
     <div class="page-header">
         <h1>Data Entry Form Demos</h1>
-        <blockquote>A collection of assorted forms for basic data entry.</blockquote>
+        <blockquote>A collection of assorted forms for basic data entry. Some of these include Validation Controls, such as <code>&lt;asp:RequiredField ...&gt;</code>. For Regular Expressions, check out this <a href="http://rextester.com/tester" target="_blank">Regular Expressions Tester</a>.</blockquote>
     </div>
     <div class="row">
         <div class="col-md-3">
