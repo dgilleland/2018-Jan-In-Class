@@ -24,7 +24,7 @@
             <p><a href="CreateBankAccount.aspx">Jump to Demo &hellip;</a></p>
         </div>
         <div class="col-md-3">
-            <h3>Context Entry</h3>
+            <h3>Contest Entry</h3>
             <p>This illustrates some simple controls to fill out an entry form for a contest.</p>
             <p><a href="ContestEntry.aspx">Jump to Demo &hellip;</a></p>
         </div>
