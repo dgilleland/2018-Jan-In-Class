@@ -32,15 +32,17 @@
     ================
     (See https://technet.microsoft.com/en-us/library/ms181984(v=sql.105).aspx)
 
-    LEN ( string_expression )
-    LEFT ( character_expression , integer_expression )
-    RIGHT ( character_expression , integer_expression )
-    SUBSTRING ( value_expression , start_expression , length_expression )
-    LTRIM ( character_expression )
-    RTRIM ( character_expression )
-    LOWER ( character_expression )
-    UPPER ( character_expression )
-    REPLACE ( string_expression , string_pattern , string_replacement )
+    LEN ( string_expression )                                               SELECT LEN('Daniel Gilleland')
+    LEFT ( character_expression , integer_expression )                      SELECT LEFT('Daniel Gilleland', 3)
+    RIGHT ( character_expression , integer_expression )                     SELECT RIGHT('Daniel Gilleland', 4)
+    SUBSTRING ( value_expression , start_expression , length_expression )   SELECT SUBSTRING('Daniel', 2, 2)
+    LTRIM ( character_expression )                                          SELECT LTRIM('   Danny    ')
+                                                                            SELECT RIGHT(LTRIM('   Danny    '), 5)
+    RTRIM ( character_expression )                                          SELECT RTRIM('   Danny    ')
+                                                                            SELECT LEFT(RTRIM('   Danny    '), 5)
+    LOWER ( character_expression )                                          SELECT LOWER('AWESOME!')
+    UPPER ( character_expression )                                          SELECT UPPER('boring')
+    REPLACE ( string_expression , string_pattern , string_replacement )     SELECT REPLACE('Daniel', 'iel', 'YELL')
 
 
 
