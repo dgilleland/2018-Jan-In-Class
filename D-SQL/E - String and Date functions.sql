@@ -2,6 +2,56 @@
 USE [A01-School]
 GO
 
+-- *******************************
+-- STRING FUNCTIONS
+	-- LEN
+	SELECT LEN('Hello World') AS 'Number of characters'
+	-- LEFT
+	SELECT LEFT('Hello World', 5) AS 'First five characters'
+	-- RIGHT
+	SELECT RIGHT('Hello World', 5) AS 'Last five characters'
+
+    SELECT LEFT(FirstName,1) + '.' + LEFT(LastName,1) + '.' AS 'Staff Initials'
+    FROM   Staff
+    ORDER BY 1 -- sorted by the first column
+
+	-- SUBSTRING
+	SELECT SUBSTRING('Hello World', 1, 2)
+	-- REVERSE  (Club whose id is an anagram)
+    INSERT INTO Club(ClubId, ClubName) VALUES ('ABCBA', 'Active Bat Catching Brotherhood Assoc.')
+	SELECT	ClubId, ClubName
+	FROM	Club
+	WHERE   ClubId = REVERSE(ClubId)
+	-- Modifying
+		-- LTRIM, RTRIM
+		-- UPPER, LOWER
+
+-- Date Functions
+	-- GETDATE()
+	SELECT GETDATE() AS 'Database Server- Current Data/Time'
+	-- DATENAME - See https://msdn.microsoft.com/en-CA/library/ms174395.aspx for DateParts
+	SELECT DATENAME(MONTH, GETDATE()) AS 'Database Server- Current Month'
+	-- DATEPART - Similar to above
+	SELECT DATEPART(WEEKDAY, GETDATE()) AS 'Day of the week',
+	       DATENAME(WEEKDAY, GETDATE()) AS 'Day of the week'
+	-- DAY
+	-- MONTH -- Birthdays this month - Student.Birthdate
+	-- YEAR
+	-- DATEDIFF - Staff.DateHired - DateReleased
+	SELECT FirstName + ' ' + LastName AS 'Staff Name',
+	       DATEDIFF(DAY, DateHired, DateReleased) AS 'Days Employed'
+           -- DateReleased - DateHired, expressed as number of Days
+	FROM   Staff
+	WHERE  DateReleased IS NOT NULL
+
+	-- DATEADD
+	SELECT DATEADD(DAY, 7, GETDATE()) AS 'Date a week from now'
+	-- ISDATE
+	SELECT ISDATE(GETDATE()) AS 'GETDATE() Info',
+	       ISDATE('Hi Dan') AS 'Not a Date'
+
+-- *******************************
+
 -- 1. Select the staff names and the name of the month they were hired
 SELECT  FirstName, LastName, DATENAME(mm, DateHired) AS 'Month Hired'
 FROM    Staff
@@ -46,7 +96,7 @@ WHERE   Mark IS NOT NULL
 -- 9. Select the First Names of students whose first names are 3 characters long.
 
 
-/*
+/* ************************************************
     String Functions
     ================
     (See https://technet.microsoft.com/en-us/library/ms181984(v=sql.105).aspx)
