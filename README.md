@@ -24,3 +24,8 @@ Next, you need to edit the `path` in your environment variables to include the f
 
 The `.gitignore` contents were supplied from [GitIgnore.io](https://gitignore.io). The `.gitattributes` contents were supplied from [GitAttributes.io](https://gitattributes.io).
 
+
+
+----
+
+[![Namespace Land Rush](https://imgs.xkcd.com/comics/namespace_land_rush.png)](https://xkcd.com/1963/)
