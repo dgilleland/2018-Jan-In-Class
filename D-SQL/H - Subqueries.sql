@@ -23,7 +23,7 @@ WHERE  PaymentTypeDescription = 'cash'
 -- TODO: Student Answer Here
 
 
---3. Select All the staff full names that have taught a course.
+--3. Select All the staff full names for staff that have taught a course.
 SELECT FirstName + ' ' + LastName AS 'Staff'
 FROM   Staff
 WHERE  StaffID IN -- I used IN because the subquery returns many rows
@@ -40,7 +40,7 @@ FROM Staff
 -- TODO: Student Answer Here
 
 
---5. Select All the staff full names that have never taught a course
+--5. Select All the staff full names of staff that have never taught a course
 SELECT FirstName + ' ' + LastName AS 'Staff'
 FROM   Staff
 WHERE  StaffID NOT IN -- I used IN because the subquery returns many rows
