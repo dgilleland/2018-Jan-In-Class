@@ -8,7 +8,8 @@ FROM    Position P -- Start with the Position table, because I want ALL position
     LEFT OUTER JOIN Staff S ON P.PositionID = S.PositionID
 
 --2. Select the Position Description and the count of how many staff are in those positions. Return the count for ALL positions.
---HINT: Count can use either count(*) which means records or a field name. Which gives the correct result in this question?
+--HINT: Count can use either count(*) which means the entire "row", or "all the columns".
+--      Which gives the correct result in this question?
 SELECT  PositionDescription,
         COUNT(StaffID) AS 'Number of Staff'
 FROM    Position P
@@ -40,5 +41,5 @@ FROM    Student S
 GROUP BY FirstName, LastName
 
 --5. How many students are in each club? Display club name and count.
- -- TODO: Student Answer Here...
+-- TODO: Student Answer Here...
 
