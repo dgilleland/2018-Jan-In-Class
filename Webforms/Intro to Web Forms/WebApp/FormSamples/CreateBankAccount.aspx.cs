@@ -29,23 +29,40 @@ partial class FormSamples_CreateBankAccount
     {
         if (IsValid) // IsValid is a property on the page that checks with the validation controls to ensure that the data in the controls passes all the validation.
         {
-            MessageLabel.Text = "Your new bank account will be processed soon.";
-            BankAccount data = new BankAccount
-            // The following is an "initializer list"
+            if (IsDuplicate())
             {
-                AccountHolder = AccountHolder.Text,
-                AccountNumber = long.Parse(AccountNumber.Text),
-                OpeningBalance = decimal.Parse(OpeningBalance.Text),
-                AccountType = AccountType.Text
-            };
+                MessageLabel.Text = "That account number has already been taken";
+            }
+            else
+            {
+                MessageLabel.Text = "Your new bank account will be processed soon.";
+                BankAccount data = new BankAccount
+                // The following is an "initializer list"
+                {
+                    AccountHolder = AccountHolder.Text,
+                    AccountNumber = long.Parse(AccountNumber.Text),
+                    OpeningBalance = decimal.Parse(OpeningBalance.Text),
+                    AccountType = AccountType.Text
+                };
 
-            BankAccounts.Add(data);
-            BankAccountGridView.DataSource = BankAccounts;
-            BankAccountGridView.DataBind();
+                BankAccounts.Add(data);
+                BankAccountGridView.DataSource = BankAccounts;
+                BankAccountGridView.DataBind();
+            }
         }
         // else....
         //      The ValidationSummary will automatically display its contents should the IsValid check return False.
     }
+
+    private bool IsDuplicate()
+    {
+        bool duplicate = false;
+        foreach (var item in BankAccounts)
+            if (item.AccountNumber == long.Parse(AccountNumber.Text))
+                duplicate = true;
+        return duplicate;
+    }
+
     protected void ClearForm_Click(object sender, EventArgs e)
     {
         // Empty out all the values of the textboxes, etc.
