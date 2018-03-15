@@ -11,16 +11,26 @@
     <div class="row">
         <div class="col-md-4">
             <h2>Code Demos</h2>
-            <asp:GridView ID="CodeDemoGridView" runat="server" CssClass="table"></asp:GridView>
+            <asp:GridView ID="CodeDemoGridView" runat="server" CssClass="table" >
+                <EmptyDataTemplate><i>No data available.</i></EmptyDataTemplate>
+            </asp:GridView>
         </div>
         <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
+            <h2>Add Code Demo</h2>
+            <fieldset>
+                <asp:Label id="Label1" runat="server"
+                     Text="Demo Name" AssociatedControlID="DemoName" />
+                <asp:TextBox ID="DemoName" runat="server" />
+
+                <asp:Label id="Label2" runat="server"
+                     Text="Description" AssociatedControlID="Description" />
+                <asp:TextBox ID="Description" runat="server"
+                     TextMode="MultiLine" />
+            </fieldset>
+            <asp:LinkButton ID="AddDemo" runat="server"
+                 OnClick="AddDemo_Click" CssClass="btn btn-primary">
+                <i class="glyphicon glyphicon-plus"></i> Add Demo
+            </asp:LinkButton>
         </div>
         <div class="col-md-4">
             <h2>Web Hosting</h2>

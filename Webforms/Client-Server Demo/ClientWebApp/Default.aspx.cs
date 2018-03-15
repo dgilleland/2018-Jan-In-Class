@@ -18,5 +18,10 @@ namespace ClientWebApp
                 CodeDemoGridView.DataBind();
             }
         }
+
+        protected void AddDemo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
