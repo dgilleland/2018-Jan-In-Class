@@ -14,5 +14,14 @@ namespace ServerSide.BLL
                 return context.CodeDemos.ToList();
             }
         }
+
+        public void AddDemo(CodeDemo info)
+        {
+            using (var context = new DemoLibraryContext())
+            {
+                context.CodeDemos.Add(info);
+                context.SaveChanges();
+            }
+        }
     }
 }

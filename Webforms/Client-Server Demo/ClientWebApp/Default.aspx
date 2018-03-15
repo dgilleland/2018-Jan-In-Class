@@ -33,14 +33,9 @@
             </asp:LinkButton>
         </div>
         <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
+            <h2>Feedback</h2>
+            <asp:Label ID="MessageLabel" runat="server" />
         </div>
     </div>
-
+    <script src="Scripts/bootwrap-freecode.js"></script>
 </asp:Content>
