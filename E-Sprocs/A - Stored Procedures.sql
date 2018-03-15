@@ -172,7 +172,7 @@ EXEC LowNumbers
 
 --7.	OK, question 6 was ridiculously simple and serves no purpose. Lets remove that stored procedure from the database.
 
---8.	Create a stored procedure called StudentPaymentTypes that lists all the student names and their payment types. Ensure all the student names are listed.
+--8.	Create a stored procedure called StudentPaymentTypes that lists all the student names and their payment types. Ensure all the student names are listed, including those who have not yet made a payment.
 
 --9.	Modify the procedure from question 8 to return only the student names that have made payments.
 
