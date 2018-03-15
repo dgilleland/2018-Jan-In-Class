@@ -36,7 +36,7 @@ EXEC GetName
 
 
 
---1.	Create a stored procedure called "HonorCourses" to select all the course names that have averages >80%.
+--1.	Create a stored procedure called "HonorCourses" to select all the course names that have averages > 80%.
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'HonorCourses')
     DROP PROCEDURE HonorCourses
 GO
@@ -84,7 +84,7 @@ GO
 
 --3.B. Your instructor is back, and recommends that the previous stored procedure use a parameter for the semester, making it more "re-usable"
 ALTER PROCEDURE HonorCoursesOneTerm
-    @Semester   char(5)
+    @Semester   char(5)   -- @ preceeds the name of the parameter
 AS
     SELECT C.CourseName
     FROM   Course C
@@ -97,6 +97,24 @@ GO
 -- Now the stored procedure can be called with any semester I want
 EXEC HonorCoursesOneTerm '2004S'
 EXEC HonorCoursesOneTerm '2004J'
+
+--4.  Create a stored procedure called CourseCalendar that lists the course ID, name, and cost of all available courses.
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'CourseCalendar')
+    DROP PROCEDURE CourseCalendar
+GO
+CREATE PROCEDURE CourseCalendar
+    -- Parameters here
+AS
+    -- Body of procedure here
+    SELECT  CourseId, CourseName, CourseCost
+    FROM    Course
+RETURN
+GO
+
+-- Call the stored procedure...
+EXEC CourseCalendar
+
+
 
 --4.B.	Create a stored procedure called "NotInCourse" that lists the full names of the students that are not in a particular course. The stored procedure should expect the course number as a parameter. e.g.: DMIT221.
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'NotInCourse')
