@@ -48,7 +48,7 @@ namespace NorthwindEntities
                 if (!string.IsNullOrEmpty(QuantityPerUnit))
                     info = ProductName;
                 else
-                    info = string.Format("{0} ({1})", ProductName, QuantityPerUnit);
+                    info = $"{ProductName} ({QuantityPerUnit})";
                 return info;
             }
         }
