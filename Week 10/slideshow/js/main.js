@@ -33,11 +33,7 @@ document.querySelector('.carousel').addEventListener('click', function(evt) {
         }
 
         // display the new current image
-        document.querySelector('.carousel>img').src = 'images/' + images[currentImg];
-
-        // update the active selector bullet
-        document.querySelector('.image-tracker .active').classList.remove('active');
-        document.querySelectorAll('[data-idx]')[currentImg].classList.add('active');
+        updateSlide(currentImg);
     }
 });
 
@@ -59,3 +55,24 @@ document.addEventListener('keydown', function(evt) {
             break;
     }
 });
+
+
+function updateSlide(index) {
+    // display the new current image
+    document.querySelector('.carousel>img').src = 'images/' + images[index];
+    // update the active selector bullet
+    document.querySelector('.image-tracker .active').classList.remove('active');
+    document.querySelectorAll('[data-idx]')[index].classList.add('active');
+}
+
+// add a variable to track the context of the interval
+var slideshowInterval;
+
+// now call the setInterval function to begin the slideshow
+slideshowInterval = setInterval(function () {
+    currentImg += 1;
+    if (currentImg == images.length) {
+        currentImg = 0;
+    }
+    updateSlide(currentImg);
+}, 3000);
