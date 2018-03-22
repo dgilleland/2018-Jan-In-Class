@@ -54,6 +54,9 @@ namespace WebApp.Practice
                         TheUsers.Add(newPerson);
                         // Refresh the data in the GridView
                         PopulateGridView();
+
+                        // Call another method to do the form-clearing
+                        ClearForm_Click(sender, e); // Hijacking - a bit of a code smell....
                     }
                     else
                     {
@@ -76,6 +79,25 @@ namespace WebApp.Practice
                 if (person.UserName == UserName.Text)
                     isAvailable = false;
             return isAvailable;
+        }
+
+        protected void ClearForm_Click(object sender, EventArgs e)
+        {
+            // Manually clear out the data entry form.
+            FirstName.Text = string.Empty;
+            LastName.Text = string.Empty;
+            UserName.Text = string.Empty;
+            Email.Text = string.Empty;
+            ConfirmEmail.Text = string.Empty;
+            Password.Text = string.Empty;
+            ConfirmPassword.Text = string.Empty;
+            AgreeToTerms.Checked = false;
+        }
+
+        protected void DeleteAllUsers_Click(object sender, EventArgs e)
+        {
+            TheUsers.Clear(); // Empties out the List<RegisteredUser> object
+            PopulateGridView();
         }
     }
 }

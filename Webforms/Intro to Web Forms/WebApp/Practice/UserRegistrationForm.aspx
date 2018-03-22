@@ -50,6 +50,15 @@
             <asp:LinkButton ID="SubmitRegistration" runat="server"
                  Text="Submit Registration" CssClass="btn btn-primary"
                  OnClick="SubmitRegistration_Click"></asp:LinkButton>
+            <%--Note the use of CausesValidation="false" on the Clear button--%>
+            <asp:LinkButton ID="ClearForm" runat="server"
+                 Text="Clear Form" CssClass="btn btn-default"
+                 CausesValidation="false"
+                 OnClick="ClearForm_Click"></asp:LinkButton>
+            <asp:LinkButton ID="DeleteAllUsers" runat="server"
+                 Text="Delete All Users" CssClass="btn btn-danger"
+                 CausesValidation="false"
+                 OnClick="DeleteAllUsers_Click"></asp:LinkButton>
         </div>
         <div class="col-md-6">
             <asp:Label ID="MessageLabel" runat="server" />

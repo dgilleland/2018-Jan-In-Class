@@ -157,6 +157,24 @@ namespace WebApp.Practice {
         protected global::System.Web.UI.WebControls.LinkButton SubmitRegistration;
         
         /// <summary>
+        /// ClearForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ClearForm;
+        
+        /// <summary>
+        /// DeleteAllUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton DeleteAllUsers;
+        
+        /// <summary>
         /// MessageLabel control.
         /// </summary>
         /// <remarks>
