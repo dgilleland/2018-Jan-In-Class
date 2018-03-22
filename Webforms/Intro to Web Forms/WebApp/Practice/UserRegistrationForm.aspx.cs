@@ -19,6 +19,7 @@ namespace WebApp.Practice
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            MessageLabel.Text = string.Empty;
             if (!IsPostBack)
                 PopulateGridView();
         }
@@ -35,22 +36,29 @@ namespace WebApp.Practice
             {
                 if(AgreeToTerms.Checked)
                 {
-                    // Make a new RegisteredUser object based off of info in
-                    // the form
-                    var newPerson = new RegisteredUser()
-                    {   // This is an "Initialization List"
-                        FirstName = FirstName.Text,
-                        LastName = LastName.Text,
-                        Email = Email.Text,
-                        Password = Password.Text,
-                        UserName = UserName.Text,
-                        AgreedToTerms = DateTime.Now
-                    };
+                    if (UserNameIsAvailable())
+                    {
+                        // Make a new RegisteredUser object based off of info in
+                        // the form
+                        var newPerson = new RegisteredUser()
+                        {   // This is an "Initialization List"
+                            FirstName = FirstName.Text,
+                            LastName = LastName.Text,
+                            Email = Email.Text,
+                            Password = Password.Text,
+                            UserName = UserName.Text,
+                            AgreedToTerms = DateTime.Now
+                        };
 
-                    // Add them to the list (or DB in a real app)
-                    TheUsers.Add(newPerson);
-                    // Refresh the data in the GridView
-                    PopulateGridView();
+                        // Add them to the list (or DB in a real app)
+                        TheUsers.Add(newPerson);
+                        // Refresh the data in the GridView
+                        PopulateGridView();
+                    }
+                    else
+                    {
+                        MessageLabel.Text = "That username is already taken.";
+                    }
                 }
                 else
                 {
@@ -58,6 +66,16 @@ namespace WebApp.Practice
                     MessageLabel.Text = "You must agree to the terms before you can be registered.";
                 }
             }
+        }
+
+        private bool UserNameIsAvailable()
+        {
+            bool isAvailable = true;
+            // Now, see if it has been taken!
+            foreach (var person in TheUsers)
+                if (person.UserName == UserName.Text)
+                    isAvailable = false;
+            return isAvailable;
         }
     }
 }
