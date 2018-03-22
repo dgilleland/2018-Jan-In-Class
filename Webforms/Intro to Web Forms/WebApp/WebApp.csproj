@@ -235,6 +235,7 @@
       <DependentUpon>DemoWebControls.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormSamples\Classes\BankAccount.cs" />
+    <Compile Include="FormSamples\Classes\RegisteredUser.cs" />
     <Compile Include="FormSamples\Classes\Registration.cs" />
     <Compile Include="FormSamples\ContestEntry.aspx.cs">
       <DependentUpon>ContestEntry.aspx</DependentUpon>

@@ -87,8 +87,9 @@
                      ControlToCompare="Email"
                      Operator="Equal" Type="String"
                      ErrorMessage="Email and Confirm Email do not match" />
-
             </div>
+            <asp:GridView ID="RegisteredUsersGridView" runat="server"
+                 EmptyDataText="No users registered. Be the first!"></asp:GridView>
         </div>
     </div>
     <script src="../Scripts/bootwrap-freecode.js"></script>
