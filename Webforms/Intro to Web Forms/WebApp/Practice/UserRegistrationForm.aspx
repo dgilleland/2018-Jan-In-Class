@@ -52,7 +52,43 @@
                  OnClick="SubmitRegistration_Click"></asp:LinkButton>
         </div>
         <div class="col-md-6">
+            <asp:Label ID="MessageLabel" runat="server" />
+            <div>
+                <%--Validation Controls--%>
+                <asp:ValidationSummary ID="ValidationSummary" runat="server"
+                     CssClass="alert alert-warning alert-dismissible"
+                     HeaderText="Please correct the following parts of the form:" />
+                <asp:RequiredFieldValidator ID="ValidateFirstName" runat="server"
+                     ControlToValidate="FirstName" Display="None"
+                     ErrorMessage="You must supply your first name" />
+                <asp:RequiredFieldValidator ID="ValidateLastName" runat="server"
+                     ControlToValidate="LastName" Display="None"
+                     ErrorMessage="You must supply your last name" />
 
+                <asp:RequiredFieldValidator ID="ValidateUserName" runat="server"
+                     ControlToValidate="UserName" Display="None"
+                     ErrorMessage="You must supply a valid User Name" />
+                <asp:RequiredFieldValidator ID="ValidateEmailRequired" runat="server"
+                     ControlToValidate="Email" Display="None"
+                     ErrorMessage="You must supply your email" />
+                <asp:RequiredFieldValidator ID="ValidatePasswordRequired" runat="server"
+                     ControlToValidate="Password" Display="None"
+                     ErrorMessage="You must supply your own password" />
+
+                <%-- Here, we are using CompareValidators to compare one control's
+                value against another control's value. --%>
+                <asp:CompareValidator ID="ValidatePassword" runat="server"
+                     ControlToValidate="ConfirmPassword" Display="None"
+                     ControlToCompare="Password"
+                     Operator="Equal" Type="String"
+                     ErrorMessage="Password and Confirm Password do not match" />
+                <asp:CompareValidator ID="ValidateEmail" runat="server"
+                     ControlToValidate="ConfirmEmail" Display="None"
+                     ControlToCompare="Email"
+                     Operator="Equal" Type="String"
+                     ErrorMessage="Email and Confirm Email do not match" />
+
+            </div>
         </div>
     </div>
     <script src="../Scripts/bootwrap-freecode.js"></script>
