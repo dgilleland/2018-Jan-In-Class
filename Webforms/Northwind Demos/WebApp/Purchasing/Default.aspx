@@ -9,12 +9,14 @@
 
     <div class="row">
         <div class="col-md-8">
-            <h2>Purchasing</h2>
+            <h2>Purchasing System</h2>
             <img src="/Images/Northwind%20Traders%20-%20Purchasing.png" class="img img-responsive" />
         </div>
         <div class="col-md-4">
             <h2>Notes</h2>
-
+            <p>
+                The purchasing system in Northwind Traders revolves around the three tables <b>Products</b>, <b>Suppliers</b> and <b>Categories</b>.
+            </p>
         </div>
     </div>
 </asp:Content>

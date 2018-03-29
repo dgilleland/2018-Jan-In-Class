@@ -4,6 +4,8 @@
     <siteMapNode url="~/Default.aspx" title="Home" />
     <siteMapNode title="Purchasing" url="~/Purchasing">
       <siteMapNode url="~/Purchasing/AddEditProduct.aspx" title="Products" />
+      <siteMapNode url="~/Purchasing/AddEditCategory.aspx" title="Categories" />
+      <siteMapNode url="~/Purchasing/AddEditSupplier.aspx" title="Suppliers" />
     </siteMapNode>
     <siteMapNode url="~/About" title="About" />
     <siteMapNode url="~/Contact" title="Contact" />

@@ -216,7 +216,9 @@
     <Content Include="Images\stick_figure_micromanaged_150_wht_9338.gif" />
     <Content Include="Images\stick_figure_scuba_150_wht_8770.gif" />
     <Content Include="Images\working_on_computer_150_wht_5655.gif" />
+    <Content Include="Purchasing\AddEditCategory.aspx" />
     <Content Include="Purchasing\AddEditProduct.aspx" />
+    <Content Include="Purchasing\AddEditSupplier.aspx" />
     <Content Include="Purchasing\Default.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -408,12 +410,26 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchasing\AddEditCategory.aspx.cs">
+      <DependentUpon>AddEditCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchasing\AddEditCategory.aspx.designer.cs">
+      <DependentUpon>AddEditCategory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Purchasing\AddEditProduct.aspx.cs">
       <DependentUpon>AddEditProduct.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Purchasing\AddEditProduct.aspx.designer.cs">
       <DependentUpon>AddEditProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchasing\AddEditSupplier.aspx.cs">
+      <DependentUpon>AddEditSupplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchasing\AddEditSupplier.aspx.designer.cs">
+      <DependentUpon>AddEditSupplier.aspx</DependentUpon>
     </Compile>
     <Compile Include="Purchasing\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -437,6 +453,7 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\ImageUploadHelpers.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

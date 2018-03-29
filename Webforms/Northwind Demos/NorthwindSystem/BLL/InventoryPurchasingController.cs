@@ -13,6 +13,17 @@ namespace NorthwindSystem.BLL
     [DataObject] // This class is a source for data
     public class InventoryPurchasingController
     {
+        #region Countries
+        public List<CountryName> ListAllCountries()
+        {
+            using (var context = new NorthwindContext())
+            {
+                var result = context.Database.SqlQuery<CountryName>("Countries_List");
+                return result.ToList();
+            }
+        }
+        #endregion
+
         #region Product CRUD
         public List<Product> ListAllProducts()
         {
@@ -102,25 +113,59 @@ namespace NorthwindSystem.BLL
         #endregion
 
         #region Category CRUD
+        [DataObjectMethod(DataObjectMethodType.Select)] // method is for SELECT
         public List<Category> ListAllCategories()
         {
-            using (var context = new NorthwindContext())
+            using (NorthwindContext context = new NorthwindContext())
             {
-                return context.Categories.ToList();
+                return context.Categories.OrderBy(item => item.CategoryName).ToList();
+                //                       \[scary] Lambda stuff [next term]/
             }
         }
 
-        public Category LookupCategory(int categoryId)
+        public Category LookupCategory(int categoryid)
         {
             using (var context = new NorthwindContext())
             {
-                return context.Categories.Find(categoryId);
+                return context.Categories.Find(categoryid);
+            }
+        }
+
+        public int AddCategory(Category item)
+        {
+            using (NorthwindContext dbContext = new NorthwindContext())
+            {
+                Category newItem = dbContext.Categories.Add(item);
+                dbContext.SaveChanges();
+                return newItem.CategoryID;
+            }
+        }
+
+        public void UpdateCategory(Category item)
+        {
+            using (NorthwindContext dbContext = new NorthwindContext())
+            {
+                var existing = dbContext.Entry(item);
+                // Tell the dbContext that this object's data is modified
+                existing.State = System.Data.Entity.EntityState.Modified;
+                // Save the changes
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteCategory(int categoryId)
+        {
+            using (var context = new NorthwindContext())
+            {
+                var existing = context.Categories.Find(categoryId);
+                context.Categories.Remove(existing);
+                context.SaveChanges();
             }
         }
         #endregion
 
         #region Supplier CRUD
-        public List<Supplier> ListAllSupplier()
+        public List<Supplier> ListAllSuppliers()
         {
             using (var context = new NorthwindContext())
             {
@@ -133,6 +178,38 @@ namespace NorthwindSystem.BLL
             using (var context = new NorthwindContext())
             {
                 return context.Suppliers.Find(supplierId);
+            }
+        }
+
+        public int AddSupplier(Supplier item)
+        {
+            using (NorthwindContext dbContext = new NorthwindContext())
+            {
+                Supplier newItem = dbContext.Suppliers.Add(item);
+                dbContext.SaveChanges();
+                return newItem.SupplierID;
+            }
+        }
+
+        public void UpdateSupplier(Supplier item)
+        {
+            using (NorthwindContext dbContext = new NorthwindContext())
+            {
+                var existing = dbContext.Entry(item);
+                // Tell the dbContext that this object's data is modified
+                existing.State = System.Data.Entity.EntityState.Modified;
+                // Save the changes
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteSupplier(int SupplierId)
+        {
+            using (var context = new NorthwindContext())
+            {
+                var existing = context.Suppliers.Find(SupplierId);
+                context.Suppliers.Remove(existing);
+                context.SaveChanges();
             }
         }
         #endregion

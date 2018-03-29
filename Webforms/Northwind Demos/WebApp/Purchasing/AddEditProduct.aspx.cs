@@ -24,7 +24,7 @@ namespace WebApp.Purchasing
         private void PopulateSupplierDropDown()
         {
             InventoryPurchasingController controller = new InventoryPurchasingController();
-            List<Supplier> suppliers = controller.ListAllSupplier();
+            List<Supplier> suppliers = controller.ListAllSuppliers();
             SupplierDropDown.DataSource = suppliers;
             SupplierDropDown.DataTextField = nameof(Supplier.CompanyName);
             SupplierDropDown.DataValueField = nameof(Supplier.SupplierID);
