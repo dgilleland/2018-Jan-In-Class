@@ -19,33 +19,72 @@
                         </asp:LinkButton>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <%--buttons...--%>
+                <div class="col-sm-6 text-center">
+                    <asp:LinkButton ID="AddProduct" runat="server"
+                        CssClass="btn btn-default" OnClick="AddProduct_Click">Add Product</asp:LinkButton>
+                    <asp:LinkButton ID="UpdateProduct" runat="server"
+                        CssClass="btn btn-default" OnClick="UpdateProduct_Click">Update Product</asp:LinkButton>
+                    <asp:LinkButton ID="DeleteProduct" runat="server"
+                        CssClass="btn btn-default" OnClick="DeleteProduct_Click">Delete Product</asp:LinkButton>
+                    <asp:LinkButton ID="ClearForm" runat="server" CausesValidation="false"
+                        CssClass="btn btn-default" OnClick="ClearForm_Click">Clear Form</asp:LinkButton>
                 </div>
             </div>
         </div>
         <hr />
         <div class="col-md-12">
-            <asp:Label ID="MessageLabel" runat="server" />
+            <br />
+            <asp:Panel ID="MessagePanel" runat="server" Visible="false" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <asp:Label ID="MessageLabel" runat="server" />
+            </asp:Panel>
+
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="alert alert-info"
+                HeaderText="Please note the following problems with your form. Correct these before adding or updating a Product." />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                ControlToValidate="ProductName" ErrorMessage="Product Name is required"
+                Display="None" />
         </div>
         <div class="col-md-12">
-            <div class="row">
-                <fieldset>
-                    <legend>Product Details</legend>
-                    <asp:Label ID="Label3" runat="server" Text="Product ID" AssociatedControlID="ProductID" />
-                    <asp:TextBox ID="ProductID" runat="server" Enabled="false" />
+            <fieldset>
+                <legend>Product Details</legend>
+                <asp:Label ID="Label3" runat="server" Text="Product ID" AssociatedControlID="ProductID" />
+                <asp:TextBox ID="ProductID" runat="server" Enabled="false" />
 
-                    <asp:Label ID="Label2" runat="server" Text="Product Name" AssociatedControlID="ProductName" />
-                    <asp:TextBox ID="ProductName" runat="server" />
+                <asp:Label ID="Label2" runat="server" Text="Product Name" AssociatedControlID="ProductName" />
+                <asp:TextBox ID="ProductName" runat="server" />
 
-                    <asp:Label ID="Label4" runat="server" Text="Supplier" AssociatedControlID="SupplierDropDown"></asp:Label>
-                    <asp:DropDownList ID="SupplierDropDown" runat="server"></asp:DropDownList>
+                <asp:Label ID="Label4" runat="server" Text="Supplier" AssociatedControlID="SupplierDropDown"></asp:Label>
+                <asp:DropDownList ID="SupplierDropDown" runat="server"></asp:DropDownList>
 
-                    <asp:Label ID="Label5" runat="server" Text="Category" AssociatedControlID="CategoryDropDown"></asp:Label>
-                    <asp:DropDownList ID="CategoryDropDown" runat="server"></asp:DropDownList>
-                </fieldset>
-            </div>
+                <asp:Label ID="Label5" runat="server" Text="Category" AssociatedControlID="CategoryDropDown"></asp:Label>
+                <asp:DropDownList ID="CategoryDropDown" runat="server"></asp:DropDownList>
+
+                <asp:Label ID="Label6" runat="server" Text="Qty per Unit" AssociatedControlID="QtyPerUnit"></asp:Label>
+                <asp:TextBox ID="QtyPerUnit" runat="server"></asp:TextBox>
+
+                <asp:Label ID="Label7" runat="server" Text="Unit Price" AssociatedControlID="UnitPrice"></asp:Label>
+                <asp:TextBox ID="UnitPrice" runat="server"></asp:TextBox>
+
+                <asp:Label ID="Label8" runat="server" Text="In Stock" AssociatedControlID="InStock"></asp:Label>
+                <asp:TextBox ID="InStock" runat="server"></asp:TextBox>
+
+                <asp:Label ID="Label9" runat="server" Text="On Order" AssociatedControlID="OnOrder"></asp:Label>
+                <asp:TextBox ID="OnOrder" runat="server"></asp:TextBox>
+
+                <asp:Label ID="Label10" runat="server" Text="Reorder Level" AssociatedControlID="ReorderLevel"></asp:Label>
+                <asp:TextBox ID="ReorderLevel" runat="server"></asp:TextBox>
+
+                <asp:Label ID="Label11" runat="server" Text="Discontinued" AssociatedControlID="Discontinued"></asp:Label>
+                <asp:CheckBox ID="Discontinued" runat="server" Text="Product is discontinued"></asp:CheckBox>
+            </fieldset>
         </div>
     </div>
+    <link href="../Content/bootwrap-freecode.css" rel="stylesheet" />
     <script src="../Scripts/bootwrap-freecode.js"></script>
+    <style>
+        select.form-control {
+            width: auto;
+        }
+    </style>
 </asp:Content>
