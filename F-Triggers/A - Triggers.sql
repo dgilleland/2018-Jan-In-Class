@@ -104,13 +104,6 @@ VALUES (199899200, 'CIPS'), -- Ivy Kent
        (200322620, 'CIPS')  -- Flying Nun
 
 
--- Why will the following succeed when the previous failed????
-INSERT INTO Activity(StudentID, ClubId)
-VALUES (200122100, 'CIPS'), -- Peter Codd
-       (200494476, 'CIPS'), -- Joe Cool
-       (200522220, 'CIPS'), -- Joe Petroni
-       (200978400, 'CIPS'), -- Peter Pan
-       (200688700, 'CIPS')  -- Robbie Chan
 
 
 -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -134,6 +127,10 @@ AS
 RETURN
 GO
 
+-- Now the following should succeed
+INSERT INTO Activity(StudentID, ClubId)
+VALUES (199899200, 'CIPS'), -- Ivy Kent
+       (200322620, 'CIPS')  -- Flying Nun
 
 
 --2.	The Education Board is concerned with rising course costs! Create a trigger to ensure that a course cost does not get increased by more than 20% at any one time.
@@ -154,8 +151,15 @@ AS
     END
 RETURN
 GO
--- TODO: Write the code that will test this stored procedure.
-
+-- TODO: Write the code that will test this trigger.
+-- quick check of the courses & costs
+select * from Course
+UPDATE Course SET CourseCost = 541 WHERE CourseID = 'DMIT103'
+-- test with good data
+UPDATE Course SET CourseCost = 540 WHERE CourseID = 'DMIT103'
+-- try another one
+select * from Course
+UPDATE COURSE SET CourseCost = 600
 
 --3.	Too many students owe us money and keep registering for more courses! Create a trigger to ensure that a student cannot register for any more courses if they have a balance owing of >$500.
 IF EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[Registration_Insert_BalanceOwing]'))
@@ -178,6 +182,11 @@ RETURN
 GO
 
 -- TODO: Student, write code to test this trigger
+
+
+
+
+
 
 --4. Our school DBA has suddenly disabled some Foreign Key constraints to deal with performance issues! Create a trigger on the Registration table to ensure that only valid CourseIDs, StudentIDs and StaffIDs are used for grade records. (You can use sp_help tablename to find the name of the foreign key constraints you need to disable to test your trigger.) Have the trigger raise an error for each foreign key that is not valid. If you have trouble with this question create the trigger so it just checks for a valid student ID.
 -- sp_help Registration -- then disable the foreign key constraints....
@@ -268,7 +277,7 @@ AS
 	    INSERT INTO BalanceOwingLog (ChangedateTime,OldBalance,NewBalance)
 	    SELECT GETDATE(), D.BalanceOwing, I.BalanceOwing
         FROM deleted D INNER JOIN inserted I on D.StudentID = I.StudentID
-	    IF @@ERROR <>0 
+	    IF @@ERROR <> 0 
 	    BEGIN
 		    RAISERROR('Insert into BalanceOwingLog Failed',16,1)
             ROLLBACK TRANSACTION
@@ -276,3 +285,45 @@ AS
 	END
 RETURN
 GO
+
+-- Test the audit trigger....
+SELECT BalanceOwing FROM Student WHERE StudentID = 199899200
+SELECT * FROM BalanceOwingLog
+
+-- Set up some test data.....
+    UPDATE Student
+    SET    BalanceOwing = BalanceOwing + 550
+    WHERE  StudentID = 199899200
+
+-- Here comes the hackers! First, the student himself.....
+UPDATE Student
+SET BalanceOwing = 1
+WHERE StudentID = 199899200
+-- Hacker student brags to friends, who give him some drinks, and the next thing you know, they've got the code...
+UPDATE Student
+SET BalanceOwing = 1
+
+-- Read This:
+-- https://motherboard.vice.com/en_us/article/the-history-of-sql-injection-the-hack-that-will-never-go-away
+
+
+
+-- 7. Create a trigger on the Staff table that ensures staff members are only added one-at-a-time.
+-- Call this trigger "Staff_Insert_Limit"
+
+
+
+
+-- 8. Create a trigger on the Staff table so that when a new staff member is added,
+-- a rollback occurs if the change results in more than one person in the "Dean" position.
+
+
+
+-- 9. Create a trigger on the Activity table so that a student cannot be added to a club if
+-- their balance is over $600.
+
+
+
+-- 10. Create a trigger to ensure that the maximum number of students in a course is never allowed.
+
+
