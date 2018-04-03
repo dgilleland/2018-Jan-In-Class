@@ -141,7 +141,7 @@ namespace WebApp.Purchasing
             Product item = new Product();
 
             // Populate with data from the form controls
-            item.ProductName = ProductName.Text;
+            item.ProductName = ProductName.Text.Trim();
 
             int temp;
             if (int.TryParse(SupplierDropDown.SelectedValue, out temp)) // If I can convert the Selected value to an int...
@@ -254,6 +254,7 @@ namespace WebApp.Purchasing
             Discontinued.Checked = false;
         }
 
+        // Enumeration values based off of Bootstrap styles for alerts.
         public enum AlertStyle { success, info, warning, danger }
 
         private void ShowMessage(string message, AlertStyle alertStyle)
