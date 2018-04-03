@@ -131,7 +131,7 @@ AS
 RETURN
 GO
 
--- 3. Create a stored procedure called RegisterStudent that accepts StudentID, CourseID and Semester as parameters. If the number of students in that course and semester are not greater than the Max Students for that course, add a record to the Grade table and add the cost of the course to the students balance. If the registration would cause the course in that semester to have greater than MaxStudents for that course raise an error.
+-- 3. Create a stored procedure called RegisterStudent that accepts StudentID, CourseID and Semester as parameters. If the number of students in that course and semester are not greater than the Max Students for that course, add a record to the Registration table and add the cost of the course to the students balance. If the registration would cause the course in that semester to have greater than MaxStudents for that course raise an error.
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'RegisterStudent')
     DROP PROCEDURE RegisterStudent
 GO
@@ -153,10 +153,10 @@ AS
 	    DECLARE @CourseCost     money
         -- Assign a value to each of the local variables
 	    SELECT @MaxStudents = MaxStudents FROM Course WHERE CourseId = @CourseID
-	    SELECT @CurrentCount = COUNT (*) FROM Registration WHERE CourseId = @CourseID AND Semester = @Semester
+	    SELECT @CurrentCount = COUNT (StudentID) FROM Registration WHERE CourseId = @CourseID AND Semester = @Semester
 	    SELECT @CourseCost = coursecost FROM Course WHERE CourseId = @CourseID
 
-	    IF @MaxStudents = @currentcount 
+	    IF @MaxStudents >= @currentcount 
 		BEGIN
 		    RAISERROR('The course is already full', 16, 1)
 		END
@@ -169,7 +169,7 @@ AS
 
 		    IF @@ERROR <> 0	
             BEGIN
-			    RAISERROR ('Grade insert failed', 16, 1)
+			    RAISERROR ('Registration insert failed', 16, 1)
 			    ROLLBACK TRANSACTION
 			END
 		    ELSE
@@ -200,56 +200,72 @@ IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROC
 GO
 
 CREATE PROCEDURE WitnessProtection
-    @StudentID int
+    @StudentID  int,
+    @First      varchar(25),
+    @Last       varchar(35),
+    @Gender     char(1),
+    @Birthdate  smalldatetime
 AS
-    IF @StudentID IS NULL
+    IF @StudentID IS NULL OR @First IS NULL OR @Last IS NULL OR @Gender IS NULL OR @Birthdate IS NULL
 	BEGIN
-	    RAISERROR ('You must provide a student ID', 16, 1)
+	    RAISERROR ('You must provide all identifying student information', 16, 1)
 	END
     ELSE
 	BEGIN
-	    BEGIN TRANSACTION
-	    DELETE  Registration 
-        WHERE   StudentID = @StudentID
-	    IF @@ERROR <> 0
-	    BEGIN
-		    RAISERROR('Grade delete failed', 16, 1)
-		    ROLLBACK TRANSACTION
-		END
-	    ELSE
-	    BEGIN
-		    DELETE Payment
-            WHERE  StudentID = @StudentID 
-		    IF @@ERROR <> 0
-		    BEGIN
-			    RAISERROR('Payment delete failed', 16, 1)
-			    ROLLBACK TRANSACTION
+        IF NOT EXISTS(SELECT StudentID FROM Student
+                      WHERE  StudentID = @StudentID
+                        AND  FirstName = @First
+                        AND  LastName = @Last
+                        AND  Gender = @Gender
+                        AND  Birthdate = @Birthdate)
+        BEGIN
+    	    RAISERROR ('That student does not exist', 16, 1)
+        END
+        ELSE
+        BEGIN
+	        BEGIN TRANSACTION
+	        DELETE  Registration 
+            WHERE   StudentID = @StudentID
+	        IF @@ERROR <> 0
+	        BEGIN
+		        RAISERROR('Grade delete failed', 16, 1)
+		        ROLLBACK TRANSACTION
 		    END
-		    ELSE
-			BEGIN
-			    DELETE Activity
-                WHERE  StudentID = @StudentID
-			    IF @@ERROR <> 0
-				BEGIN
-				    RAISERROR('Activity delete failed', 16, 1)
-				    ROLLBACK TRANSACTION
-			    END
-			    ELSE
-			    BEGIN	
-				    DELETE Student
+	        ELSE
+	        BEGIN
+		        DELETE Payment
+                WHERE  StudentID = @StudentID 
+		        IF @@ERROR <> 0
+		        BEGIN
+			        RAISERROR('Payment delete failed', 16, 1)
+			        ROLLBACK TRANSACTION
+		        END
+		        ELSE
+			    BEGIN
+			        DELETE Activity
                     WHERE  StudentID = @StudentID
-				    IF @@ERROR <> 0
+			        IF @@ERROR <> 0
 				    BEGIN
-					    RAISERROR('Student delete failed', 16, 1)
-					    ROLLBACK TRANSACTION
-				    END
-				    ELSE
-				    BEGIN
-					    COMMIT TRANSACTION
-				    END
-			    END
-		    END
-	    END
+				        RAISERROR('Activity delete failed', 16, 1)
+				        ROLLBACK TRANSACTION
+			        END
+			        ELSE
+			        BEGIN	
+				        DELETE Student
+                        WHERE  StudentID = @StudentID
+				        IF @@ERROR <> 0
+				        BEGIN
+					        RAISERROR('Student delete failed', 16, 1)
+					        ROLLBACK TRANSACTION
+				        END
+				        ELSE
+				        BEGIN
+					        COMMIT TRANSACTION
+				        END
+			        END
+		        END
+	        END
+        END
     END
 RETURN
 GO
