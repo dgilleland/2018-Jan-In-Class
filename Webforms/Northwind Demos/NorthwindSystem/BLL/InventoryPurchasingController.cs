@@ -4,6 +4,7 @@ using System.Collections.Generic; // List<T>
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq; // for extension methods such as .ToList()
+using System;
 
 namespace NorthwindSystem.BLL
 {
@@ -54,6 +55,18 @@ namespace NorthwindSystem.BLL
                          .Database // access the database directly to ...
                            .SqlQuery<Product>("EXEC Products_GetByCategories @cat"
                                               , new SqlParameter("cat", searchId))
+                             .ToList();
+            }
+        }
+
+        public List<Product> GetProductsBySupplier(int searchId)
+        {
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                return context // from the context of where I connect to the Db server...
+                         .Database // access the database directly to ...
+                           .SqlQuery<Product>("EXEC Products_GetBySuppliers @sup"
+                                              , new SqlParameter("sup", searchId))
                              .ToList();
             }
         }

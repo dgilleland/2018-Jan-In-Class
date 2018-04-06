@@ -220,6 +220,7 @@
     <Content Include="Purchasing\AddEditProduct.aspx" />
     <Content Include="Purchasing\AddEditSupplier.aspx" />
     <Content Include="Purchasing\Default.aspx" />
+    <Content Include="Purchasing\SearchProducts.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootwrap-freecode.js" />
@@ -437,6 +438,13 @@
     </Compile>
     <Compile Include="Purchasing\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchasing\SearchProducts.aspx.cs">
+      <DependentUpon>SearchProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchasing\SearchProducts.aspx.designer.cs">
+      <DependentUpon>SearchProducts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
