@@ -8,6 +8,7 @@
       <siteMapNode url="~/Purchasing/AddEditSupplier.aspx" title="Suppliers" />
     </siteMapNode>
     <siteMapNode url="~/Purchasing/SearchProducts.aspx" title="Search Products" />
+    <siteMapNode url="~/Purchasing/DataBound/ProductCatalog.aspx" title="Data-Bound Search" />
     <siteMapNode url="~/About" title="About" />
     <siteMapNode url="~/Contact" title="Contact" />
   </siteMapNode>

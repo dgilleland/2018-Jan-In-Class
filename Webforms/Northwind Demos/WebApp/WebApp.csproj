@@ -219,6 +219,7 @@
     <Content Include="Purchasing\AddEditCategory.aspx" />
     <Content Include="Purchasing\AddEditProduct.aspx" />
     <Content Include="Purchasing\AddEditSupplier.aspx" />
+    <Content Include="Purchasing\DataBound\ProductCatalog.aspx" />
     <Content Include="Purchasing\Default.aspx" />
     <Content Include="Purchasing\SearchProducts.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -274,6 +275,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Web.sitemap" />
+    <Content Include="WebConnectionStrings.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AddPhoneNumber.aspx.cs">
@@ -431,6 +433,13 @@
     </Compile>
     <Compile Include="Purchasing\AddEditSupplier.aspx.designer.cs">
       <DependentUpon>AddEditSupplier.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Purchasing\DataBound\ProductCatalog.aspx.cs">
+      <DependentUpon>ProductCatalog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Purchasing\DataBound\ProductCatalog.aspx.designer.cs">
+      <DependentUpon>ProductCatalog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Purchasing\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
