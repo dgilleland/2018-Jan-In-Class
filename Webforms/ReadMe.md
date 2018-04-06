@@ -6,7 +6,7 @@ Official documentation on [ASP.NET Web Forms](https://docs.microsoft.com/en-us/a
 >
 > - [Download Intro Source Zip](https://ci.appveyor.com/api/buildjobs/6x8wbwd1ywwqrv47/artifacts/IntroToWebForms.zip)
 > - [Download Data Entry Source Zip](https://ci.appveyor.com/api/buildjobs/59rm4tm7u2nrmjbo/artifacts/IntroToWebForms.zip)
-> - [Download Northwind Demos Zip](https://ci.appveyor.com/api/buildjobs/hq17jpo0vlo9l3uw/artifacts/NorthwindDemo.zip)
+> - [Download Northwind Demos Zip](https://ci.appveyor.com/api/buildjobs/qojjgnswoe4txtb3/artifacts/NorthwindDemo.zip)
 
 ## Updating NuGet Packages
 
