@@ -28,7 +28,7 @@ For example, consider the following sitemap file:
 
 That will produce the following menu:
 
-> *Image TBA*
+![](SiteMapMenu.png)
 
 ## Edit the `Site.master`
 
