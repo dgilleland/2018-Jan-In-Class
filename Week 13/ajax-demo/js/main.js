@@ -8,6 +8,7 @@ button.addEventListener('click', function (evt) {
 	xhr.send(null);
 	// don't reload the page
 	evt.preventDefault();
+	console.log('Finished Click event');
 });
 
 xhr.addEventListener('load', function (evt) {
@@ -17,4 +18,5 @@ xhr.addEventListener('load', function (evt) {
 		console.log('... request failed.');
 		output.innerHTML = '<div>Request Failed.</div>';
 	}
+	console.log('Finished Load event');
 });
