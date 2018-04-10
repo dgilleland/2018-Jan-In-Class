@@ -9,6 +9,9 @@
     </siteMapNode>
     <siteMapNode url="~/Purchasing/SearchProducts.aspx" title="Search Products" />
     <siteMapNode url="~/Purchasing/DataBound/ProductCatalog.aspx" title="Data-Bound Search" />
+    <siteMapNode title="Sales">
+      <siteMapNode url="~/Sales/AddEditOrder.aspx" title="Orders" />
+    </siteMapNode>
     <siteMapNode url="~/About" title="About" />
     <siteMapNode url="~/Contact" title="Contact" />
   </siteMapNode>
