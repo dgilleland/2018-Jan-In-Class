@@ -31,8 +31,28 @@ namespace NorthwindEntities
         public string ProductName { get; set; }     // ProductName  nvarchar(40)            NOT NULL,
         public int? SupplierID { get; set; }        // SupplierID   int                         NULL,
         public int? CategoryID { get; set; }        // CategoryID   int                         NULL,
+
+        #region Example of a Fully-Implemented property with a backing store
+        // Field as my "backing store"
+        private string _QuantityPerUnit;
         [StringLength(20)]
-        public string QuantityPerUnit { get; set; } // QuantityPerUnit  nvarchar(20)            NULL,
+        public string QuantityPerUnit               // QuantityPerUnit  nvarchar(20)            NULL,
+        {
+            get
+            {
+                return _QuantityPerUnit;
+            }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    _QuantityPerUnit = null;  // Replace an "empty" string value with a NULL
+                else
+                    _QuantityPerUnit = value;
+            }
+        }
+        #endregion
+
+
         public decimal? UnitPrice { get; set; }     // UnitPrice    money                       NULL,
         public short? UnitsInStock { get; set; }    // UnitsInStock smallint                    NULL,
         public short? UnitsOnOrder { get; set; }    // UnitsOnOrder smallint                    NULL,

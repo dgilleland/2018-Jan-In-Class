@@ -215,6 +215,7 @@
     <Content Include="Images\stick_figure_colored_running_inside_arrows_150_wht_9682.gif" />
     <Content Include="Images\stick_figure_micromanaged_150_wht_9338.gif" />
     <Content Include="Images\stick_figure_scuba_150_wht_8770.gif" />
+    <Content Include="Images\System Classes.png" />
     <Content Include="Images\working_on_computer_150_wht_5655.gif" />
     <Content Include="Purchasing\AddEditCategory.aspx" />
     <Content Include="Purchasing\AddEditProduct.aspx" />

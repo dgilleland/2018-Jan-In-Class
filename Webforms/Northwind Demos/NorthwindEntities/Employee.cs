@@ -25,11 +25,11 @@ namespace NorthwindEntities
         public string HomePhone { get; set; }
         public string Extension { get; set; }
         public byte[] Photo { get; set; }
-        public string PhotoMimeType { get; set; }
+        //public string PhotoMimeType { get; set; }
         public string Notes { get; set; }
         public int? ReportsTo { get; set; }
         public string PhotoPath { get; set; }
-        public DateTime LastModified { get; set; } = DateTime.Now;
+        //public DateTime LastModified { get; set; } = DateTime.Now;
 
         [NotMapped]
         public string FullName { get { return $"{FirstName} {Lastname}"; } }

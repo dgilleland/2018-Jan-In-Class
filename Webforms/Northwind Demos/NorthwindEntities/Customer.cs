@@ -9,7 +9,8 @@ namespace NorthwindEntities
     public class Customer
     {
         #region Column Mappings
-        [Key]
+        // When a PK is NOT an Identity, use DatabaseGenerated(DatabaseGeneratedOption.None)
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string CustomerID { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
