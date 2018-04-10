@@ -9,7 +9,7 @@
 | A05      | James / Matthew |
 | A06      | Eric |
 | A07      | Len |
-| A08      | Alex |
+| A08      | Alex D / Alexander V |
 | A09      | Anton |
 | A10      | Korissa |
 | A11      | Emily J. |
