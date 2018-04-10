@@ -2,7 +2,7 @@
 
 | Scenario | Student |
 | -------- | ------- |
-| A01      | Bo |
+| A01      | Bo / Ahmad |
 | A02      | Meng |
 | A03      | Yi Zheng |
 | A04      | Emily U. |
