@@ -27,6 +27,7 @@ namespace NorthwindSystem.BLL
         #endregion
 
         #region Product CRUD
+        [DataObjectMethod(DataObjectMethodType.Select)]
         public List<Product> ListAllProducts()
         {
             // This "using" statement is different than the "using" at the top of this file.
@@ -179,6 +180,7 @@ namespace NorthwindSystem.BLL
         #endregion
 
         #region Supplier CRUD
+        [DataObjectMethod(DataObjectMethodType.Select)]
         public List<Supplier> ListAllSuppliers()
         {
             using (var context = new NorthwindContext())
