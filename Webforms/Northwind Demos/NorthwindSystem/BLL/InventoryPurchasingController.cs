@@ -15,6 +15,7 @@ namespace NorthwindSystem.BLL
     public class InventoryPurchasingController
     {
         #region Countries
+        [DataObjectMethod(DataObjectMethodType.Select)]
         public List<CountryName> ListAllCountries()
         {
             using (var context = new NorthwindContext())
