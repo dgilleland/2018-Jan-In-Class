@@ -11,4 +11,8 @@ Go to the appropriate branch, depending on your section:
 
 ----
 
+!> Documents pages build with [**docsify**](https://docsify.js.org/#), a Vue-based markdown documentation tool.
+
+---
+
 [![](https://imgs.xkcd.com/comics/not_enough_work.png)](https://xkcd.com/554/)
