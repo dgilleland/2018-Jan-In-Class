@@ -1,6 +1,6 @@
 ![](dgilleland.png)
 
-# In-Class Samples <small>Dan Gilleland</small>
+# In-Class Samples <small>by Dan Gilleland</small>
 
 > Code Samples and Ad-Hoc Notes for Jan 2018 School Term
 
