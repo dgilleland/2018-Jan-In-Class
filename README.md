@@ -6,6 +6,7 @@
 Go to the appropriate branch, depending on your section:
 
 - [CPSC 1517 Introduction to Application Development **A03**](https://github.com/dgilleland/2018-Jan-In-Class/tree/CPSC-1517-A03)
+  - [More **up-to-date samples** here](https://github.com/dgilleland/2018-Jan-In-Class/tree/merge-to-1517)
 - [CPSC 1520 JavaScript 1 **A03**](https://github.com/dgilleland/2018-Jan-In-Class/tree/CPSC-1520-A03)
 - [DMIT 1508 Database Fundamentals **A01**](https://github.com/dgilleland/2018-Jan-In-Class/tree/DIMT-1508-A01)
 
